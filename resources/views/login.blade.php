@@ -29,15 +29,16 @@
 
         <div class="container d-flex justify-content-center">
             <div class="w-50">
-                <form>
+                <form action="{{ route ('login') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control border border-2 border-dark" id="email"
+                        <input type="email" name="email" class="form-control border border-2 border-dark" id="email"
                             placeholder="Enter your email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control border border-2 border-dark" id="password"
+                        <input type="password" name="password" class="form-control border border-2 border-dark" id="password"
                             placeholder="Enter your password" required>
                     </div>
                     <button type="button" class="btn btn-primary w-100 mb-3 mt-4"
@@ -62,7 +63,7 @@
 
         <p class="text-center mt-5">
             Don't have an account?
-            <a href="{{ route('register') }}" class="text-decoration-none text-primary"><strong>Register here!</strong></a>
+            <a href="{{ route('display.register') }}" class="text-decoration-none text-primary"><strong>Register here!</strong></a>
         </p>
 
 

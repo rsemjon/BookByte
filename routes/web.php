@@ -9,7 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', [LoginController::class, 'showLogin'])->name('login');
-
-Route::get('register', [RegisterController::class, 'showRegister'])->name('register');
+Route::get('login', [LoginController::class, 'displayLogin'])->name('display.login');
+Route::get('register', [RegisterController::class, 'displayRegister'])->name('display.register');
+Route::post('login', [LoginController::class, 'loginUser'])->name('login');
+Route::post('register', [RegisterController::class, 'registerUser'])->name('register');
 

@@ -29,31 +29,38 @@
 
         <div class="container d-flex justify-content-center">
             <div class="w-50">
-                <form>
+                <form action="{{ route ('register') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control border border-2 border-dark" id="firstName"
+                        <label for="name" class="form-label">First Name</label>
+                        <input type="text" name="name" class="form-control border border-2 border-dark" id="firstName"
                             placeholder="Enter your first name" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control border border-2 border-dark" id="email"
+                        <input type="email" name="email" class="form-control border border-2 border-dark" id="email"
                             placeholder="Enter your email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control border border-2 border-dark" id="password"
+                        <input type="password" name="password" class="form-control border border-2 border-dark" id="password"
                             placeholder="Enter your password" required>
                     </div>
                     <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control border border-2 border-dark" id="confirmPassword"
+                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                        <input type="password" name="password_confirmation" class="form-control border border-2 border-dark" id="confirmPassword"
                             placeholder="Confirm your password" required>
                     </div>
-                    <button type="button" class="btn btn-primary w-100 mb-3 mt-4"
-                        onclick="window.location.href='login.html'">
-                        Register
-                    </button>
+                    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Register</button>
+
+
+                    @if($errors->any())
+                        <ul>
+                            @foreach($errors->all() as $e)
+                            <li>{{$e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </form>
             </div>
         </div>
@@ -72,7 +79,7 @@
 
         <p class="text-center mt-5">
             Already have an account?
-            <a href="{{ route('login') }}" class="text-decoration-none text-primary"><strong>Log In here!</strong></a>
+            <a href="{{ route('display.login') }}" class="text-decoration-none text-primary"><strong>Log In here!</strong></a>
         </p>
 
     </main>
