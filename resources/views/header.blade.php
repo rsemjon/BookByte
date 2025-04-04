@@ -52,7 +52,7 @@
         </form>
 
         <!-- Profile -->
-        <a href="profile.html" class="nav-link text-white me-3">
+        <a href="{{ route('profile') }}" class="nav-link text-white me-3">
           <i class="fas fa-user fa-2x"></i>
         </a>
 

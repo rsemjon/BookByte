@@ -17,8 +17,8 @@ class RegisterController extends Controller
     public function registerUser(Request $req)
     {
         $validated = $req->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
+            'name' => 'required|string|unique:users,name',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:7|confirmed'
         ]);
 
