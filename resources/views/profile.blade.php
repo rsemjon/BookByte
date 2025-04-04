@@ -52,11 +52,12 @@
                         <div class="col-md-4">
                             <label for="second_name" class="form-label">Second Name</label>
                             <input type="text" class="form-control border border-2 border-dark" id="second_name"
-                                placeholder="Enter your second name" required>
+                                placeholder="{{ Auth::user()->last_name }}" required>
                         </div>
                         <div class="col-md-4">
                             <label for="birth_date" class="form-label">Date of Birth</label>
                             <input type="date" class="form-control border border-2 border-dark" id="birth_date"
+                                placeholder="{{ Auth::user()->birth_date }}"
                                 required>
                         </div>
                     </div>
@@ -64,12 +65,12 @@
                         <div class="col-md-4">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control border border-2 border-dark" id="email"
-                                placeholder="Enter your email" required>
+                                placeholder="{{ Auth::user()->email }}" required>
                         </div>
                         <div class="col-md-4">
                             <label for="phone_number" class="form-label">Phone Number</label>
                             <input type="tel" class="form-control border border-2 border-dark" id="phone_number"
-                                placeholder="Enter your phone number" required>
+                                placeholder="{{ Auth::user()->phone_number }}" required>
                         </div>
                         <div class="col-md-4 col-12 d-flex align-items-end mt-3 mt-md-0">
                             <button type="submit" class="btn btn-primary w-100">

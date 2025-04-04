@@ -24,9 +24,6 @@
         <ul class="list-inline d-flex align-items-center justify-content-center">
             <li class="list-inline-item me-3">
                 <h3 class="fw-bold">Login</h3>
-                @auth
-                    <h1>Welcome, {{ Auth::user()->name }}</h1>
-                @endauth
             </li>
         </ul>
 
