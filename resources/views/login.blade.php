@@ -44,10 +44,15 @@
                         <input type="password" name="password" class="form-control border border-2 border-dark" id="password"
                             placeholder="Enter your password" required>
                     </div>
-                    <button type="button" class="btn btn-primary w-100 mb-3 mt-4"
-                        onclick="window.location.href='index.html'">
-                        Login
-                    </button>
+                    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Login</button>
+
+                    @if($errors->any())
+                        <ul>
+                            @foreach($errors->all() as $e)
+                            <li>{{$e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </form>
             </div>
         </div>

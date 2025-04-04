@@ -13,9 +13,23 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function loginUser()
+    public function loginUser(Request $req)
     {
-        
+        $validated = $req->validate([
+            'email' => 'required|email',
+            'password' => 'required|String'
+        ]);
+
+        if(!Auth::attempt($validated)){
+            throw ValidationException::withMessage([
+                'credentials' => 'Incorrect credentials'
+            ]);
+            
+        }
+        else{
+            $req->session()->regenerate();
+            return redirect()->route('profile');
+        }
     }
 
     public function logoutUser(Request $req)
