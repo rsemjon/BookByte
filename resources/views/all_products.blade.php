@@ -109,30 +109,34 @@
                     </div>
 
                     <!-- Language -->
-                    <div class="mb-3">
-                        <div class="d-flex align-items-center">
-                            <h5 class="fw-bold mb-0">Language</h5>
-                            <button class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
-                                data-target="languageFilters">
-                                <i class="bi bi-chevron-down"></i>
-                            </button>
-                        </div>
+                    <form method="GET" action="{{ route('allProducts') }}">
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center">
+                                <h5 class="fw-bold mb-0">Language</h5>
+                                <button class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" type="button" data-target="languageFilters">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                            </div>
 
-                        <div id="languageFilters" class="mt-2" style="display: none;">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="language1">
-                                <label class="form-check-label" for="language1">English</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="language2">
-                                <label class="form-check-label" for="language2">Slovak</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="language3">
-                                <label class="form-check-label" for="language3">Russian</label>
+                            <div id="languageFilters" class="mt-2" style="display: none;">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="English" id="language1">
+                                    <label class="form-check-label" for="language1">English</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="Slovak" id="language2">
+                                    <label class="form-check-label" for="language2">Slovak</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="Russian" id="language3">
+                                    <label class="form-check-label" for="language3">Russian</label>
+                                </div>
+
+                                <!-- Add the Filter button inside the dropdown -->
+                                <button type="submit" class="btn btn-primary mt-2">Filter</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
 
                     <!-- Author -->
                     <div class="mb-3">
