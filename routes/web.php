@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,9 +15,13 @@ Route::get('register', [RegisterController::class, 'displayRegister'])->name('di
 Route::post('login', [LoginController::class, 'loginUser'])->name('login');
 Route::post('register', [RegisterController::class, 'registerUser'])->name('register');
 Route::post('logout', [LoginController::class, 'logoutUser'])->name('logout');
-Route::view('profile', 'profile')->name('profile');
 
+//Route::view('profile', 'profile')->name('profile');
 Route::get('/profile', function () {
     return view('profile'); 
 })->middleware('auth')->name('profile');
+
+Route::get('products', [ProductController::class, 'showAllProducts'])->name('allProducts');
+
+
 
