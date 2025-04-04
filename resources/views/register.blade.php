@@ -1,4 +1,4 @@
-<!-- login.html -->
+<!-- register.html -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Login</title>
+    <title>Registration</title>
     <link rel="icon" href="/images/icons/icon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -23,13 +23,18 @@
         <hr>
         <ul class="list-inline d-flex align-items-center justify-content-center">
             <li class="list-inline-item me-3">
-                <h3 class="fw-bold">Login</h3>
+                <h3 class="fw-bold">Register</h3>
             </li>
         </ul>
 
         <div class="container d-flex justify-content-center">
             <div class="w-50">
                 <form>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control border border-2 border-dark" id="firstName"
+                            placeholder="Enter your first name" required>
+                    </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control border border-2 border-dark" id="email"
@@ -40,9 +45,14 @@
                         <input type="password" class="form-control border border-2 border-dark" id="password"
                             placeholder="Enter your password" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control border border-2 border-dark" id="confirmPassword"
+                            placeholder="Confirm your password" required>
+                    </div>
                     <button type="button" class="btn btn-primary w-100 mb-3 mt-4"
-                        onclick="window.location.href='index.html'">
-                        Login
+                        onclick="window.location.href='login.html'">
+                        Register
                     </button>
                 </form>
             </div>
@@ -61,11 +71,9 @@
         </div>
 
         <p class="text-center mt-5">
-            Don't have an account?
-            <a href="{{ route('register') }}" class="text-decoration-none text-primary"><strong>Register here!</strong></a>
+            Already have an account?
+            <a href="{{ route('login') }}" class="text-decoration-none text-primary"><strong>Log In here!</strong></a>
         </p>
-
-
 
     </main>
 
