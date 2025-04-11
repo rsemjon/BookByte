@@ -52,15 +52,6 @@
                 <!-- Image Carousel -->
                 <div class="col-md-4 text-center">
                     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" >
-                    <!--  -->
-                        <!-- 
-                            <div class="carousel-item active">
-                                <img id="bookImage1" class="img-fluid w-100 rounded shadow-sm" alt="Book Cover">
-                            </div>
-                            <div class="carousel-item">
-                                <img id="bookImage2" class="img-fluid w-100 rounded shadow-sm" alt="Book Cover Back">
-                            </div>
-                        </div> -->
                         <div class="carousel-inner">
                             @foreach($photosUrls as $photoUrl)
                                 <div class="carousel-item active">
