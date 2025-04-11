@@ -51,7 +51,7 @@ class ProductController extends Controller
             $all->orderBy($column, $direction);
         }
         
-        $products = $all->get();
+        $products = $all->paginate(5);
         return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors', 'selectedGenres'));
     }
 

@@ -208,15 +208,37 @@
                     @endforeach
                     
                     </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <ul class="pagination">
+                            <!-- First page link -->
+                            <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link text-start text-secondary" href="{{ $products->url(1) }}">First</a>
+                            </li>
+
+                            <!-- Page range -->
+                            @foreach ($products->getUrlRange($products->currentPage()-2, $products->currentPage()+2) as $page => $url)
+                                @if ($page >= 1 && $page <= $products->lastPage())
+                                    <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link text-start text-secondary" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+
+                            <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
+                                <a class="page-link text-start text-secondary" href="{{ $products->url($products->lastPage()) }}">Last</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
 
                 <!-- Paging -->
-                <nav aria-label="Page navigation example">
+                <!-- <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item"><a class="page-link text-primary" href="#">Previous</a></li>
                         <li class="page-item"><a class="page-link text-primary" href="#">Next</a></li>
                     </ul>
-                </nav>
+                </nav> -->
 
             </section>
         </div>
