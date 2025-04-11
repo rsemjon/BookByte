@@ -44,9 +44,9 @@
             <div class="d-flex align-items-center col-12 col-md-auto mt-2 mt-md-0">
                 <h5 class="fw-bold me-2 mb-0">Order by</h5>
                 <select class="form-select w-auto" id="sortSelect", name="sortOption" onchange="updateSort()">
+                <option value="bestsellers" {{ request('sortOption') == 'bestsellers' ? 'selected' : '' }}>Bestsellers</option>
                 <option value="price-asc" {{ request('sortOption') == 'price-asc' ? 'selected' : '' }}>Price: Low to High</option>
                 <option value="price-desc" {{ request('sortOption') == 'price-desc' ? 'selected' : '' }}>Price: High to Low</option>
-                <option value="bestsellers" {{ request('sortOption') == 'bestsellers' ? 'selected' : '' }}>Bestsellers</option>
                 <option value="newest" {{ request('sortOption') == 'newest' ? 'selected' : '' }}>Newest</option>
                 </select>
             </div>

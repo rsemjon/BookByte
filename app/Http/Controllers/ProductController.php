@@ -50,6 +50,9 @@ class ProductController extends Controller
             [$column, $direction] = $sortOptions[$sortOption];
             $all->orderBy($column, $direction);
         }
+        else{
+            $all->orderBy('total_purchased', 'desc');
+        }
         
         $products = $all->paginate(5);
         return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors', 'selectedGenres'));
