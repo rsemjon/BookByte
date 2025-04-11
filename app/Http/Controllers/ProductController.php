@@ -23,12 +23,17 @@ class ProductController extends Controller
         if ($request->has('author') && is_array($request->author)) {
             $all->whereIn('products.author', $request->author);
         }
+
+        if ($request->has('genre') && is_array($request->genre)) {
+            $all->whereIn('products.genre', $request->genre);
+        }
     
 
         $products = $all->get();
         $selectedLanguages = $request->language ?? [];
         $selectedAuthors =array_map('trim', $request->author ?? []);
+        $selectedGenres = array_map('trim', $request->genre ?? []);
 
-        return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors'));
+        return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors', 'selectedGenres'));
     }
 }

@@ -91,19 +91,23 @@
 
                         <div id="genreFilters" class="mt-2" style="display: none;">
                             <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre1">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre1" value = "Science Fiction"
+                                @checked(in_array(trim('Science Fiction'), $selectedGenres))>
                                 <label class="form-check-label" for="genre1">Science Fiction</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre2">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre2" value = "Classic"
+                                @checked(in_array('Classic', $selectedGenres))>
                                 <label class="form-check-label" for="genre2">Classic</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre3">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre3" value = "Horror"
+                                @checked(in_array('Horror', $selectedGenres))>
                                 <label class="form-check-label" for="genre3">Horror</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre4">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre4" value = "Detective"
+                                @checked(in_array('Detective', $selectedGenres))>
                                 <label class="form-check-label" for="genre4">Detective</label>
                             </div>
                         </div>
@@ -169,6 +173,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Filter</button>
                 </form>
+                <a href="{{ route('allProducts') }}" class="btn btn-primary mt-2">Clear Filters</a>
             </aside>
 
             <!-- Main second container -->
@@ -190,6 +195,7 @@
                                         </h5>
                                         <p class="text-start text-dark text-truncate mb-1">{{ $product->author }}</p>
                                         <p class="text-start text-muted text-truncate mb-3">Language: {{ $product->language }}</p>
+                                        <p class="text-start text-muted text-truncate mb-3">Genre: {{ $product->genre }}</p>
                                     </div>
                                     <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ $product->price }} €</p>
                                 </div>
