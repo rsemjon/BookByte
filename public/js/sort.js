@@ -67,3 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+function updateSort() {
+    const sortValue = document.getElementById('sortSelect').value;
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('sortOption', sortValue);
+    window.location.href = currentUrl.href;
+}

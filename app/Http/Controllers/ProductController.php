@@ -9,10 +9,23 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function showAllProducts(Request $request)
+
     {
-        // Retrieve all products from the database
+
+        $sortOptions = [
+            'price-asc' => ['price', 'asc'],
+            'price-desc' => ['price', 'desc'],
+            'bestsellers' => ['total_purchased', 'desc'],
+            'newest' => ['created_at', 'desc'],
+        ];
+
         $min = $request->input('priceMin');
         $max = $request->input('priceMax');
+        $sortOption = $request->input('sortOption');
+        $selectedLanguages = $request->language ?? [];
+        $selectedAuthors =array_map('trim', $request->author ?? []);
+        $selectedGenres = array_map('trim', $request->genre ?? []);
+
         $all = DB::table('products')
         ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
         ->select('products.*', 'pi.image');
@@ -34,12 +47,12 @@ class ProductController extends Controller
             $all->whereBetween('products.price', [$min, $max]);
         }
 
+        if (isset($sortOptions[$sortOption])) {
+            [$column, $direction] = $sortOptions[$sortOption];
+            $all->orderBy($column, $direction);
+        }
         
         $products = $all->get();
-        $selectedLanguages = $request->language ?? [];
-        $selectedAuthors =array_map('trim', $request->author ?? []);
-        $selectedGenres = array_map('trim', $request->genre ?? []);
-
         return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors', 'selectedGenres'));
     }
 }
