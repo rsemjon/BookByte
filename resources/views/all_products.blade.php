@@ -58,12 +58,13 @@
 
             <aside class="col-md-3 pe-5">
                 <h3 class="fw-bold">Filters</h3>
+                <form method="GET" action="{{ route('allProducts') }}">
 
                     <!-- Price -->
                     <div class="mb-3">
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Price</h5>
-                            <button class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
                                 data-target="priceFilter">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
@@ -82,7 +83,7 @@
                     <div class="mb-3">
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Genre</h5>
-                            <button class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
                                 data-target="genreFilters">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
@@ -90,59 +91,59 @@
 
                         <div id="genreFilters" class="mt-2" style="display: none;">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre1">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre1">
                                 <label class="form-check-label" for="genre1">Science Fiction</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre2">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre2">
                                 <label class="form-check-label" for="genre2">Classic</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre3">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre3">
                                 <label class="form-check-label" for="genre3">Horror</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="genre4">
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre4">
                                 <label class="form-check-label" for="genre4">Detective</label>
                             </div>
                         </div>
                     </div>
 
                     <!-- Language -->
-                    <form method="GET" action="{{ route('allProducts') }}">
+                    
                         <div class="mb-3">
                             <div class="d-flex align-items-center">
                                 <h5 class="fw-bold mb-0">Language</h5>
-                                <button class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" type="button" data-target="languageFilters">
+                                <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" type="button" data-target="languageFilters">
                                     <i class="bi bi-chevron-down"></i>
                                 </button>
                             </div>
 
                             <div id="languageFilters" class="mt-2" style="display: none;">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="English" id="language1">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="English" id="language1"
+                                    @checked(in_array('English', $selectedLanguages))>
                                     <label class="form-check-label" for="language1">English</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="Slovak" id="language2">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="Slovak" id="language2"
+                                    @checked(in_array('Slovak', $selectedLanguages))>
                                     <label class="form-check-label" for="language2">Slovak</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="Russian" id="language3">
+                                    <input class="form-check-input" type="checkbox" name="language[]" value="Russian" id="language3"
+                                    @checked(in_array('Russian', $selectedLanguages))>
                                     <label class="form-check-label" for="language3">Russian</label>
                                 </div>
-
-                                <!-- Add the Filter button inside the dropdown -->
-                                <button type="submit" class="btn btn-primary mt-2">Filter</button>
                             </div>
                         </div>
-                    </form>
+                    
 
                     <!-- Author -->
                     <div class="mb-3">
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Author</h5>
-                            <button class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
                                 data-target="authorFilters">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
@@ -150,40 +151,24 @@
 
                         <div id="authorFilters" class="mt-2" style="display: none;">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author1">
+                                <input class="form-check-input" name="author[]" type="checkbox" id="author1" value="Philip K. Dick"
+                                @checked(in_array(trim('Philip K. Dick'), $selectedAuthors))>
                                 <label class="form-check-label" for="author1">Philip K. Dick</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author2">
-                                <label class="form-check-label" for="author2">George Orwell</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author3">
-                                <label class="form-check-label" for="author3">F. Scott Fitzgerald</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author4">
-                                <label class="form-check-label" for="author4">Leo Tolstoy</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author5">
-                                <label class="form-check-label" for="author5">Fyodor Dostoevsky</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author6">
+                                <input class="form-check-input" name="author[]" type="checkbox" id="author6" value="Jozef Karika"
+                                @checked(in_array(trim('Jozef Karika'), $selectedAuthors))>
                                 <label class="form-check-label" for="author6">Jozef Karika</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author7">
+                                <input class="form-check-input" name="author[]" type="checkbox" id="author7" value="Dominik Dan"
+                                @checked(in_array(trim('Dominik Dan'), $selectedAuthors))>
                                 <label class="form-check-label" for="author7">Dominik Dan</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="author8">
-                                <label class="form-check-label" for="author8">Ladislav Mnyachko</label>
                             </div>
                         </div>
                     </div>
-
+                    <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                </form>
             </aside>
 
             <!-- Main second container -->
@@ -195,16 +180,19 @@
                     <div class="row row-cols-1 row-cols-md-2 g4">
                     @foreach($products as $product)
                     <div class="col mb-3">
-                    <a href="" class="text-decoration-none text-dark">
-                        <div class="card border-0 shadow-sm d-flex flex-row align-items-stretch p-3">
-                            <img src="{{$product->image}}" class="img-fluid rounded" style="width: 220px; height: auto;" alt="{{ $product->title }}">
-                            <div class="card-body d-flex flex-column justify-content-between p-3">
-                                <div>
-                                    <h5 class="text-start text-primary fw-bold text-truncate mb-1" style="max-width: 200px;">{{ $product->title }}</h5>
-                                    <p class="text-start text-dark text-truncate mb-3">{{ $product->author }}</p>
+                        <a href="" class="text-decoration-none text-dark">
+                            <div class="card border-0 shadow-sm d-flex flex-row align-items-stretch p-3">
+                                <img src="{{ $product->image }}" class="img-fluid rounded" style="width: 220px; height: auto;" alt="{{ $product->title }}">
+                                <div class="card-body d-flex flex-column justify-content-between p-3">
+                                    <div>
+                                        <h5 class="text-start text-primary fw-bold text-truncate mb-1" style="max-width: 200px;">
+                                            {{ $product->title }}
+                                        </h5>
+                                        <p class="text-start text-dark text-truncate mb-1">{{ $product->author }}</p>
+                                        <p class="text-start text-muted text-truncate mb-3">Language: {{ $product->language }}</p>
+                                    </div>
+                                    <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ $product->price }} €</p>
                                 </div>
-                                <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ $product->price }} €</p>
-                            </div>
                             </div>
                         </a>
                     </div>      

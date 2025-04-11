@@ -15,14 +15,20 @@ class ProductController extends Controller
         ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
         ->select('products.*', 'pi.image');
 
-    // Filter by language if checkboxes are selected
         if ($request->has('language') && is_array($request->language)) {
             $languages = array_map('strtolower', $request->language);
             $all->whereIn(DB::raw('lower(products.language)'), $languages);
         }
 
-        $products = $all->get();
+        if ($request->has('author') && is_array($request->author)) {
+            $all->whereIn('products.author', $request->author);
+        }
+    
 
-        return view('all_products', compact('products'));
+        $products = $all->get();
+        $selectedLanguages = $request->language ?? [];
+        $selectedAuthors =array_map('trim', $request->author ?? []);
+
+        return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors'));
     }
 }
