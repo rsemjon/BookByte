@@ -11,7 +11,6 @@ class ProductController extends Controller
     public function showAllProducts(Request $request)
 
     {
-
         $sortOptions = [
             'price-asc' => ['price', 'asc'],
             'price-desc' => ['price', 'desc'],
@@ -54,5 +53,16 @@ class ProductController extends Controller
         
         $products = $all->get();
         return view('all_products', compact('products', 'selectedLanguages', 'selectedAuthors', 'selectedGenres'));
+    }
+
+    public function showSpecificProduct(Request $req, $id)
+    {
+        $product = Product::findOrFail($id);
+        $id = $product->id;
+        $photosUrls = DB::table('product_image')
+            ->where('product_id', $id)
+            ->pluck('image')
+            ->toArray();  
+        return view('product_page', compact('product', 'photosUrls'));
     }
 }

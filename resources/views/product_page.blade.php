@@ -1,0 +1,144 @@
+<!-- product.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title id="pageTitle">Product</title>
+    <link rel="icon" href="/images/icons/icon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Header -->
+    @include('header')
+
+    <!-- Main Content -->
+    <main class="container flex-fill mt-5 pt-4 pb-5 mb-5">
+
+        <hr>
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mt-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="text-decoration-none text-dark">
+                            <i class="bi bi-house-door-fill"></i> Home
+                        </a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="all-products.html" class="text-decoration-none text-dark"> All Books </a>
+                    </li>
+                    
+                    <li class="breadcrumb-item active text-muted" id="bookTitleBreadcrumb" aria-current="page">
+                        Book
+                    </li>
+                </ol>
+            </nav>
+
+        </div>
+
+        <div class="container pt-3">
+            <div class="row align-items-center">
+
+                <!-- Image Carousel -->
+                <div class="col-md-4 text-center">
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" >
+                    <!--  -->
+                        <!-- 
+                            <div class="carousel-item active">
+                                <img id="bookImage1" class="img-fluid w-100 rounded shadow-sm" alt="Book Cover">
+                            </div>
+                            <div class="carousel-item">
+                                <img id="bookImage2" class="img-fluid w-100 rounded shadow-sm" alt="Book Cover Back">
+                            </div>
+                        </div> -->
+                        <div class="carousel-inner">
+                            @foreach($photosUrls as $photoUrl)
+                                <div class="carousel-item active">
+                                    <img src='{{ $photoUrl }}' id="bookImage" class="img-fluid w-100 rounded shadow-sm" alt="Book presentation image">
+                                </div>
+                            @endforeach
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <!-- Book -->
+                    <h2 class="text-dark fw-bold" id="bookTitle">{{ $product->title }}</h2>
+
+                    <!-- Author -->
+                    <h5 class="text-primary" id="bookAuthor">{{ $product->author }}</h5>
+
+                    <!-- Tags -->
+                    <div class="d-flex flex-wrap mt-2">
+                        <span class="badge bg-info me-2 fs-6 p-2" id="bookGenre">{{ $product->genre }}</span>
+                        <span class="badge bg-info fs-6 p-2" id="bookLanguage">{{ $product->language }}</span>
+                    </div>
+                    
+                    <hr>
+
+                    <!-- Description -->
+                    <p class="text-muted" id="bookDescription">{{ $product->description }}</p>
+
+                    <ul class="list-inline mt-5 pt-4 d-flex flex-row flex-wrap align-items-center justify-content-start text-center gap-3">
+
+                        <!-- Price -->
+                        <li class="list-inline-item">
+                            <h3 class="text-secondary fw-bold mb-0" id="bookPrice">{{ $product->price }}</h3>
+                        </li>
+
+                        <!-- In Stocks -->
+                        <li class="list-inline-item">
+                            <h6 class="text-dark mb-0" id="bookStock">In Stock {{ $product->in_stock }} pcs</h6>
+                        </li>
+                    
+                        <!-- Add to Cart -->
+                        <li class="list-inline-item">
+                            <a href="#" class="btn btn-primary px-4 d-inline-block text-nowrap" style="min-width: 170px;">
+                                Add to Cart <i class="fas fa-shopping-cart ms-2"></i>
+                            </a>
+                        </li>
+
+                        <!-- Edit Product -->
+                        <li class="list-inline-item">
+                            <a href="admin-page.html" class="btn btn-primary px-4 d-inline-block text-nowrap" style="min-width: 170px;">
+                                Edit Product <i class="fas fa-edit ms-2"></i>
+                            </a>
+                        </li>
+                    </ul>                                              
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    @include('footer')
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="resources/scripts/load.js"></script>
+    <script src="resources/scripts/product.js"></script> -->
+</body>
+
+</html>

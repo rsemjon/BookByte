@@ -188,7 +188,7 @@
                     <div class="row row-cols-1 row-cols-md-2 g4">
                     @foreach($products as $product)
                     <div class="col mb-3">
-                        <a href="" class="text-decoration-none text-dark">
+                        <a href="{{ route('show.product', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
                             <div class="card border-0 shadow-sm d-flex flex-row align-items-stretch p-3">
                                 <img src="{{ $product->image }}" class="img-fluid rounded" style="width: 220px; height: auto;" alt="{{ $product->title }}">
                                 <div class="card-body d-flex flex-column justify-content-between p-3">

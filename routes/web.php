@@ -22,6 +22,7 @@ Route::get('/profile', function () {
 })->middleware('auth')->name('profile');
 
 Route::get('products', [ProductController::class, 'showAllProducts'])->name('allProducts');
+Route::get('/product/{id}', [ProductController::class, 'showSpecificProduct'])->name('show.product');
 
 
 
