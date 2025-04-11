@@ -73,10 +73,13 @@
                         <div id="priceFilter" class="mt-2" style="display: none;">
                             <div id="priceSlider"></div>
                             <div class="d-flex justify-content-between mt-2">
-                                <span id="priceMinLabel">3€</span>
-                                <span id="priceMaxLabel">42€</span>
+                                <span id="priceMinLabel">value="{{ request('priceMin', 3) }}€</span>
+                                <span id="priceMaxLabel">value="{{ request('priceMax', 42) }}€</span>
                             </div>
                         </div>
+
+                        <input type="hidden" name="priceMin" id="priceMinInput" value="{{ request('priceMin', 3) }}">
+                        <input type="hidden" name="priceMax" id="priceMaxInput" value="{{ request('priceMax', 42) }}">
                     </div>
 
                     <!-- Genre -->
@@ -224,7 +227,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/sort.js"></script>
-    <script src="/js/all-books.js"></script>
+    <!-- <script src="/js/all-books.js"></script> -->
 </body>
 
 </html>

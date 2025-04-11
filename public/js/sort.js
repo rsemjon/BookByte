@@ -3,9 +3,13 @@
 var priceSlider = document.getElementById('priceSlider');
 var priceMinLabel = document.getElementById('priceMinLabel');
 var priceMaxLabel = document.getElementById('priceMaxLabel');
+var minInput = document.getElementById('priceMinInput');
+var maxInput = document.getElementById('priceMaxInput');
+const min = parseFloat(document.getElementById('priceMinInput').value);
+const max = parseFloat(document.getElementById('priceMaxInput').value);
 
 noUiSlider.create(priceSlider, {
-    start: [3, 42],
+    start: [min, max],
     connect: true,
     range: {
         'min': 3,
@@ -29,6 +33,12 @@ priceSlider.noUiSlider.on('update', function (values, handle) {
     } else {
         priceMaxLabel.textContent = values[1];
     }
+
+    var min = values[0].replace('€', '');
+    var max = values[1].replace('€', '');
+    minInput.value = min;
+    maxInput.value = max;
+    console.log(max);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
