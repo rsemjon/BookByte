@@ -7,6 +7,7 @@ Ordering logic:
 - all cart functionalities(adding to cart, modifying cart, order information(delivery, personal...))
 - save cart together with all order information
 - save order into DB
+- !! CHECK IN GH - need to transfer the cart if user filled the cart and then logged in and he does not have any active cart stored
 
 
 Admin page:
