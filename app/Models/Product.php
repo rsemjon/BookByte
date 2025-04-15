@@ -27,9 +27,9 @@ class Product extends Model
     // If you want to specify hidden columns, use the 'hidden' property
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function users()
+    public function products()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(Product::class);               
     }
 
     public function images()
