@@ -115,11 +115,15 @@
                         </li>
 
                         <!-- Edit Product -->
-                        <li class="list-inline-item">
-                            <a href="#" class="btn btn-primary px-4 d-inline-block text-nowrap" style="min-width: 170px;">
-                                Edit Product <i class="fas fa-edit ms-2"></i>
-                            </a>
-                        </li>
+                        @auth
+                            @if(Auth::user()->role === 'admin')
+                                <li class="list-inline-item">
+                                    <a href="#" class="btn btn-primary px-4 d-inline-block text-nowrap" style="min-width: 170px;">
+                                        Edit Product <i class="fas fa-edit ms-2"></i>
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
                     </ul>                                              
                 </div>
             </div>
