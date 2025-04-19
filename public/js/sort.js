@@ -1,76 +1,72 @@
 // sort.js
+document.addEventListener("DOMContentLoaded", () => {
 
-var priceSlider = document.getElementById('priceSlider');
-var priceMinLabel = document.getElementById('priceMinLabel');
-var priceMaxLabel = document.getElementById('priceMaxLabel');
-var minInput = document.getElementById('priceMinInput');
-var maxInput = document.getElementById('priceMaxInput');
-const min = parseFloat(document.getElementById('priceMinInput').value);
-const max = parseFloat(document.getElementById('priceMaxInput').value);
+    const priceSlider   = document.getElementById("priceSlider");
+    const priceMinLabel = document.getElementById("priceMinLabel");
+    const priceMaxLabel = document.getElementById("priceMaxLabel");
+    const minInput      = document.getElementById("priceMinInput");
+    const maxInput      = document.getElementById("priceMaxInput");
 
-noUiSlider.create(priceSlider, {
-    start: [min, max],
-    connect: true,
-    range: {
-        'min': 3,
-        'max': 42
-    },
-    step: 1,
-    tooltips: false,
-    format: {
-        to: function (value) {
-            return Math.round(value) + '€';
-        },
-        from: function (value) {
-            return Number(value.replace('€', ''));
+    const globalMin   = parseFloat(priceSlider.dataset.min);
+    const globalMax   = parseFloat(priceSlider.dataset.max);
+    const selectedMin = parseFloat(minInput.value) || globalMin;
+    const selectedMax = parseFloat(maxInput.value) || globalMax;
+
+    noUiSlider.create(priceSlider, {
+        start  : [selectedMin, selectedMax],
+        connect: true,
+        range  : { min: globalMin, max: globalMax },
+        step   : 1,
+        format : {
+            to  : v => Math.round(v) + "€",
+            from: v => Number(v.replace("€", ""))
         }
-    }
-});
+    });
 
-priceSlider.noUiSlider.on('update', function (values, handle) {
-    if (handle === 0) {
-        priceMinLabel.textContent = values[0];
-    } else {
-        priceMaxLabel.textContent = values[1];
-    }
+    priceSlider.noUiSlider.on("update", (values, handle) => {
+        if (handle === 0) {
+            priceMinLabel.textContent = values[0];
+        } else {
+            priceMaxLabel.textContent = values[1];
+        }
+        minInput.value = values[0].replace("€", "");
+        maxInput.value = values[1].replace("€", "");
+    });
 
-    var min = values[0].replace('€', '');
-    var max = values[1].replace('€', '');
-    minInput.value = min;
-    maxInput.value = max;
-    console.log(max);
-});
+    document.getElementById("sortSelect")?.addEventListener("change", function () {
+        const url = new URL(window.location.href);
+        url.searchParams.set("sortOption", this.value);
+        window.location.href = url.href;
+    });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sortParam = urlParams.get("sort");
+    const iconUp   = '<i class="bi bi-chevron-up"></i>';
+    const iconDown = '<i class="bi bi-chevron-down"></i>';
 
-    const sortSelect = document.getElementById("sortSelect");
-    if (sortParam && sortSelect) {
-        sortSelect.value = sortParam;
-    }
-});
+    document.querySelectorAll(".toggle-filter").forEach(btn => {
+        const targetId  = btn.dataset.target;
+        const targetDiv = document.getElementById(targetId);
+        const storageKey = "filter-" + targetId;
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".toggle-filter").forEach(button => {
-        button.addEventListener("click", function () {
-            const targetId = this.getAttribute("data-target");
-            const targetDiv = document.getElementById(targetId);
+        const saved = localStorage.getItem(storageKey);
+        if (saved === "open") {
+            targetDiv.style.display = "block";
+            btn.innerHTML = iconUp;
+        } else {
+            targetDiv.style.display = "none";
+            btn.innerHTML = iconDown;
+        }
 
-            if (targetDiv.style.display === "none") {
+        btn.addEventListener("click", function () {
+            const isHidden = targetDiv.style.display === "none";
+            if (isHidden) {
                 targetDiv.style.display = "block";
-                this.innerHTML = '<i class="bi bi-chevron-up"></i>';
+                btn.innerHTML = iconUp;
+                localStorage.setItem(storageKey, "open");
             } else {
                 targetDiv.style.display = "none";
-                this.innerHTML = '<i class="bi bi-chevron-down"></i>';
+                btn.innerHTML = iconDown;
+                localStorage.setItem(storageKey, "closed");
             }
         });
     });
 });
-
-function updateSort() {
-    const sortValue = document.getElementById('sortSelect').value;
-    const currentUrl = new URL(window.location.href);
-    currentUrl.searchParams.set('sortOption', sortValue);
-    window.location.href = currentUrl.href;
-}

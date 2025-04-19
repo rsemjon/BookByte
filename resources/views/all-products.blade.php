@@ -65,115 +65,81 @@
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Price</h5>
                             <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
-                                data-target="priceFilter">
+                                    data-target="priceFilter">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
                         </div>
 
-                        <div id="priceFilter" class="mt-2" style="display: none;">
-                            <div id="priceSlider"></div>
+                        <div id="priceFilter" class="mt-2" style="display:none;">
+                            <div id="priceSlider"
+                                data-min="{{ $minPrice }}"
+                                data-max="{{ $maxPrice }}"></div>
+
                             <div class="d-flex justify-content-between mt-2">
-                                <span id="priceMinLabel">value="{{ request('priceMin', 3) }}€</span>
-                                <span id="priceMaxLabel">value="{{ request('priceMax', 42) }}€</span>
+                                <span id="priceMinLabel">{{ request('priceMin', $minPrice) }}€</span>
+                                <span id="priceMaxLabel">{{ request('priceMax', $maxPrice) }}€</span>
                             </div>
                         </div>
 
-                        <input type="hidden" name="priceMin" id="priceMinInput" value="{{ request('priceMin', 3) }}">
-                        <input type="hidden" name="priceMax" id="priceMaxInput" value="{{ request('priceMax', 42) }}">
+                        <input type="hidden" name="priceMin" id="priceMinInput" value="{{ request('priceMin', $minPrice) }}">
+                        <input type="hidden" name="priceMax" id="priceMaxInput" value="{{ request('priceMax', $maxPrice) }}">
                     </div>
 
                     <!-- Genre -->
                     <div class="mb-3">
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Genre</h5>
-                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
-                                data-target="genreFilters">
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" data-target="genreFilters">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
                         </div>
-
                         <div id="genreFilters" class="mt-2" style="display: none;">
+                            @foreach($availableGenres as $genre)
                             <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre1" value = "Science Fiction"
-                                @checked(in_array(trim('Science Fiction'), $selectedGenres))>
-                                <label class="form-check-label" for="genre1">Science Fiction</label>
+                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre_{{ $loop->index }}" value="{{ $genre }}" @checked(in_array($genre, $selectedGenres))>
+                                <label class="form-check-label" for="genre_{{ $loop->index }}">{{ $genre }}</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre2" value = "Classic"
-                                @checked(in_array('Classic', $selectedGenres))>
-                                <label class="form-check-label" for="genre2">Classic</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre3" value = "Horror"
-                                @checked(in_array('Horror', $selectedGenres))>
-                                <label class="form-check-label" for="genre3">Horror</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" name="genre[]" type="checkbox" id="genre4" value = "Detective"
-                                @checked(in_array('Detective', $selectedGenres))>
-                                <label class="form-check-label" for="genre4">Detective</label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
                     <!-- Language -->
                     
-                        <div class="mb-3">
-                            <div class="d-flex align-items-center">
-                                <h5 class="fw-bold mb-0">Language</h5>
-                                <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" type="button" data-target="languageFilters">
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                            </div>
-
-                            <div id="languageFilters" class="mt-2" style="display: none;">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="English" id="language1"
-                                    @checked(in_array('English', $selectedLanguages))>
-                                    <label class="form-check-label" for="language1">English</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="Slovak" id="language2"
-                                    @checked(in_array('Slovak', $selectedLanguages))>
-                                    <label class="form-check-label" for="language2">Slovak</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="language[]" value="Russian" id="language3"
-                                    @checked(in_array('Russian', $selectedLanguages))>
-                                    <label class="form-check-label" for="language3">Russian</label>
-                                </div>
-                            </div>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center">
+                            <h5 class="fw-bold mb-0">Language</h5>
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" data-target="languageFilters">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
                         </div>
-                    
+                        <div id="languageFilters" class="mt-2" style="display: none;">
+                            @foreach($availableLanguages as $lang)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="language[]" value="{{ $lang }}" id="lang_{{ $loop->index }}" @checked(in_array($lang, $selectedLanguages))>
+                                <label class="form-check-label" for="lang_{{ $loop->index }}">{{ $lang }}</label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
 
                     <!-- Author -->
                     <div class="mb-3">
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Author</h5>
-                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter"
-                                data-target="authorFilters">
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" data-target="authorFilters">
                                 <i class="bi bi-chevron-down"></i>
                             </button>
                         </div>
-
                         <div id="authorFilters" class="mt-2" style="display: none;">
+                            @foreach($availableAuthors as $author)
                             <div class="form-check">
-                                <input class="form-check-input" name="author[]" type="checkbox" id="author1" value="Philip K. Dick"
-                                @checked(in_array(trim('Philip K. Dick'), $selectedAuthors))>
-                                <label class="form-check-label" for="author1">Philip K. Dick</label>
+                                <input class="form-check-input" name="author[]" type="checkbox" id="author_{{ $loop->index }}" value="{{ $author }}" @checked(in_array($author, $selectedAuthors))>
+                                <label class="form-check-label" for="author_{{ $loop->index }}">{{ $author }}</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" name="author[]" type="checkbox" id="author6" value="Jozef Karika"
-                                @checked(in_array(trim('Jozef Karika'), $selectedAuthors))>
-                                <label class="form-check-label" for="author6">Jozef Karika</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" name="author[]" type="checkbox" id="author7" value="Dominik Dan"
-                                @checked(in_array(trim('Dominik Dan'), $selectedAuthors))>
-                                <label class="form-check-label" for="author7">Dominik Dan</label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
+                    
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">Filter</button>
                         <a href="{{ route('allProducts') }}" class="btn btn-outline-primary">Clear</a>
@@ -181,40 +147,41 @@
             </aside>
 
             <!-- Main second container -->
-            <section class="col-md-9 mb-5">
+            <section class="col-md-9 mb-5 d-flex flex-column">
 
                 <!-- All Products -->
-                <div id="products" class="mb-5">
-
+                <div id="products" class="flex-grow-1 mb-4">
                     <div class="row row-cols-1 row-cols-md-2 g4">
                     @foreach($products as $product)
                         @include('components.horizontal-card', ['product' => $product])
                     @endforeach
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mt-4">
-                        <ul class="pagination">
-                            <!-- First page link -->
-                            <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link text-start text-secondary" href="{{ $products->url(1) }}">First</a>
-                            </li>
 
-                            <!-- Page range -->
-                            @foreach ($products->getUrlRange($products->currentPage()-2, $products->currentPage()+2) as $page => $url)
-                                @if ($page >= 1 && $page <= $products->lastPage())
-                                    <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link {{ $products->currentPage() == $page ? 'bg-primary text-white border-primary' : 'text-secondary' }}" href="{{ $url }}">
-                                            {{ $page }}
-                                        </a>
-                                    </li>
-                                @endif
-                            @endforeach
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center mt-auto pt-3">
+                    <ul class="pagination mb-0">
+                        <!-- First page link -->
+                        <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link text-start text-secondary" href="{{ $products->url(1) }}">First</a>
+                        </li>
 
-                            <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
-                                <a class="page-link text-start text-secondary" href="{{ $products->url($products->lastPage()) }}">Last</a>
-                            </li>
-                        </ul>
-                    </div>
+                        <!-- Page range -->
+                        @foreach ($products->getUrlRange($products->currentPage()-2, $products->currentPage()+2) as $page => $url)
+                            @if ($page >= 1 && $page <= $products->lastPage())
+                                <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link {{ $products->currentPage() == $page ? 'bg-primary text-white border-primary' : 'text-secondary' }}" href="{{ $url }}">
+                                        {{ $page }}
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+
+                        <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
+                            <a class="page-link text-start text-secondary" href="{{ $products->url($products->lastPage()) }}">Last</a>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </div>
     </main>

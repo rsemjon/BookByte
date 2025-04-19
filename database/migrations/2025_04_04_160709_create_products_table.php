@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('author');
             $table->text('description'); // Use text for long descriptions
             $table->string('genre');
-            $table->enum('language', ['slovak', 'russian', 'english', 'german']); // Fix enum
+            $table->enum('language', ['Slovak', 'Russian', 'English', 'German']); // Fix enum
             $table->decimal('price', 10, 2)->default(0); // Fix price storage
             $table->integer('in_stock')->default(0); // Use integer for stock count
             $table->integer('total_purchased')->default(0); // Use integer for tracking purchases

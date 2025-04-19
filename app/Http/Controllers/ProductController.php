@@ -25,6 +25,13 @@ class ProductController extends Controller
         $selectedAuthors =array_map('trim', $request->author ?? []);
         $selectedGenres = array_map('trim', $request->genre ?? []);
 
+        $availableGenres = Product::select('genre')->distinct()->pluck('genre')->sort()->values();
+        $availableLanguages = Product::select('language')->distinct()->pluck('language')->sort()->values();
+        $availableAuthors = Product::select('author')->distinct()->pluck('author')->sort()->values();
+
+        $minPrice = Product::min('price');
+        $maxPrice = Product::max('price');
+
         $all = DB::table('products')
         ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
         ->select('products.*', 'pi.image');
@@ -55,7 +62,18 @@ class ProductController extends Controller
         }
         
         $products = $all->paginate(5);
-        return view('all-products', compact('products', 'selectedLanguages', 'selectedAuthors', 'selectedGenres'));
+
+        return view('all-products', compact(
+            'products',
+            'availableGenres',
+            'availableLanguages',
+            'availableAuthors',
+            'minPrice',
+            'maxPrice',
+            'selectedGenres',
+            'selectedLanguages',
+            'selectedAuthors'
+        ));
     }
 
     public function showSpecificProduct(Request $req, $id)

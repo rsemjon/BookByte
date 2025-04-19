@@ -1,7 +1,5 @@
 Tasks that need to be done by control point phase:
 
-- new DB model
-
 Ordering logic:
 - all cart functionalities(adding to cart, modifying cart, order information(delivery, personal...))
 - save cart together with all order information
