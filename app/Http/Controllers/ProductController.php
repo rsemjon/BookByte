@@ -68,4 +68,40 @@ class ProductController extends Controller
             ->toArray();  
         return view('product_page', compact('product', 'photosUrls'));
     }
+
+    public function showHomeProducts()
+{
+    // image query
+    $imageJoin = DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi');
+
+    // bestsellers - 7 most purchased
+    $bestsellers = DB::table('products')
+        ->join($imageJoin, 'products.id', '=', 'pi.product_id')
+        ->select('products.*', 'pi.image')
+        ->orderByDesc('total_purchased')
+        ->take(7)
+        ->get();
+
+    // newcomers - 7 most new added
+    $newcomers = DB::table('products')
+        ->join($imageJoin, 'products.id', '=', 'pi.product_id')
+        ->select('products.*', 'pi.image')
+        ->orderByDesc('created_at')
+        ->take(7)
+        ->get();
+
+    // trending - 7 idk
+    $trending = DB::table('products')
+        ->join($imageJoin, 'products.id', '=', 'pi.product_id')
+        ->select('products.*', 'pi.image')
+        ->where('total_purchased', '>', 0)
+        ->where('in_stock', '>', 0)
+        ->inRandomOrder()
+        ->take(7)
+        ->get();
+
+    return view('home', compact('bestsellers', 'newcomers', 'trending'));
+}
+
+
 }

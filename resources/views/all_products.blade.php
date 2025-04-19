@@ -187,27 +187,11 @@
 
                     <div class="row row-cols-1 row-cols-md-2 g4">
                     @foreach($products as $product)
-                    <div class="col mb-3">
-                        <a href="{{ route('show.product', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
-                            <div class="card border-0 shadow-sm d-flex flex-row align-items-stretch p-3">
-                                <img src="{{ $product->image }}" class="img-fluid rounded" style="width: 220px; height: auto;" alt="{{ $product->title }}">
-                                <div class="card-body d-flex flex-column justify-content-between p-3">
-                                    <div>
-                                        <h5 class="text-start text-primary fw-bold text-truncate mb-1" style="max-width: 200px;">
-                                            {{ $product->title }}
-                                        </h5>
-                                        <p class="text-start text-dark text-truncate mb-1">{{ $product->author }}</p>
-                                        <p class="text-start text-muted text-truncate mb-3">Language: {{ $product->language }}</p>
-                                        <p class="text-start text-muted text-truncate mb-3">Genre: {{ $product->genre }}</p>
-                                    </div>
-                                    <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ $product->price }} €</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>      
+                        @include('components.horizontal_card', ['product' => $product])
                     @endforeach
-                    
+
                     </div>
+
                     <div class="d-flex justify-content-center mt-4">
                         <ul class="pagination">
                             <!-- First page link -->

@@ -6,9 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductController::class, 'showHomeProducts'])->name('home');
 
 Route::get('login', [LoginController::class, 'displayLogin'])->name('display.login');
 Route::get('register', [RegisterController::class, 'displayRegister'])->name('display.register');
