@@ -1,6 +1,5 @@
 Tasks that need to be done by control point phase:
 
-- home page
 - new DB model
 
 Ordering logic:

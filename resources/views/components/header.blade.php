@@ -7,7 +7,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="{{ route('home') }}">
       <img src="/images/logos/8.png" alt="Logo" height="40">
     </a>
 
@@ -24,13 +24,13 @@
       <!-- Left Part -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-light" href="all-products.html?sort=newest">Newest</a>
+          <a class="nav-link text-light" href="{{ route('allProducts', ['sortOption' => 'newest']) }}">Newest</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="all-products.html?sort=bestsellers">Bestsellers</a>
+          <a class="nav-link text-light" href="{{ route('allProducts', ['sortOption' => 'bestsellers']) }}">Bestsellers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="all-products.html">All Books</a>
+          <a class="nav-link text-light" href="{{ route('allProducts') }}">All Books</a>
         </li>
       </ul>
 
@@ -57,7 +57,7 @@
         </a>
 
         <!-- Shopping Cart -->
-        <a href="shopping-cart.html" class="nav-link text-white">
+        <a href="#" class="nav-link text-white">
           <i class="fas fa-shopping-cart fa-2x"></i>
         </a>
 
