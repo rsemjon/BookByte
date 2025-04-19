@@ -1,4 +1,4 @@
-{{-- components/vertical_card.blade.php --}}
+{{-- components/vertical-card.blade.php --}}
 <div class="list-inline-item me-4 p-2">
     <a href="{{ route('show.product', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
         <div class="card border-0 shadow-sm" style="width: 255px;">

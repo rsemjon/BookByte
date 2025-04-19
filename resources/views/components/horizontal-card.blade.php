@@ -1,4 +1,4 @@
-{{-- components/horizontal_card.blade.php --}}
+{{-- components/horizontal-card.blade.php --}}
 <div class="col mb-3">
     <a href="{{ route('show.product', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
         <div class="card border-0 shadow-sm d-flex flex-row align-items-stretch p-3">
@@ -9,8 +9,6 @@
                         {{ $product->title }}
                     </h5>
                     <p class="text-start text-dark text-truncate mb-1">{{ $product->author }}</p>
-                    <p class="text-start text-muted text-truncate mb-3">Language: {{ $product->language }}</p>
-                    <p class="text-start text-muted text-truncate mb-3">Genre: {{ $product->genre }}</p>
                 </div>
                 <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ $product->price }} €</p>
             </div>

@@ -30,9 +30,9 @@
             <nav aria-label="breadcrumb" class="mt-0 col-12 col-md-auto">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="index.html" class="text-decoration-none text-dark">
-                            <i class="bi bi-house-door-fill"></i> Home
-                        </a>
+                    <a href="{{ route('home') }}" class="text-decoration-none text-dark">
+                        <i class="bi bi-house-door-fill"></i> Home
+                    </a>
                     </li>
                     <li class="breadcrumb-item active text-muted" aria-current="page">
                         All Books
@@ -174,9 +174,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Filter</button>
-                </form>
-                <a href="{{ route('allProducts') }}" class="btn btn-primary mt-2">Clear Filters</a>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a href="{{ route('allProducts') }}" class="btn btn-outline-primary">Clear</a>
+                    </div>
             </aside>
 
             <!-- Main second container -->
@@ -187,12 +188,11 @@
 
                     <div class="row row-cols-1 row-cols-md-2 g4">
                     @foreach($products as $product)
-                        @include('components.horizontal_card', ['product' => $product])
+                        @include('components.horizontal-card', ['product' => $product])
                     @endforeach
-
                     </div>
-
-                    <div class="d-flex justify-content-center mt-4">
+                </div>
+                <div class="d-flex justify-content-center mt-4">
                         <ul class="pagination">
                             <!-- First page link -->
                             <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
@@ -203,7 +203,9 @@
                             @foreach ($products->getUrlRange($products->currentPage()-2, $products->currentPage()+2) as $page => $url)
                                 @if ($page >= 1 && $page <= $products->lastPage())
                                     <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link text-start text-secondary" href="{{ $url }}">{{ $page }}</a>
+                                        <a class="page-link {{ $products->currentPage() == $page ? 'bg-primary text-white border-primary' : 'text-secondary' }}" href="{{ $url }}">
+                                            {{ $page }}
+                                        </a>
                                     </li>
                                 @endif
                             @endforeach
@@ -213,17 +215,6 @@
                             </li>
                         </ul>
                     </div>
-
-                </div>
-
-                <!-- Paging -->
-                <!-- <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link text-primary" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link text-primary" href="#">Next</a></li>
-                    </ul>
-                </nav> -->
-
             </section>
         </div>
     </main>
@@ -233,7 +224,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/sort.js"></script>
-    <!-- <script src="/js/all-books.js"></script> -->
 </body>
 
 </html>

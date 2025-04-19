@@ -152,6 +152,14 @@ p, span, li, a {
     font-family: var(--font-secondary);
 }
 
+.btn-outline-primary {
+    background-color: var(--light);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: var(--font-secondary);
+    transition: all 0.2s ease-in-out;
+}
+
 .btn-secondary {
     background-color: var(--secondary);
     border-color: var(--secondary);

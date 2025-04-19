@@ -37,7 +37,7 @@
                 <div style="overflow-x: auto; white-space: nowrap;">
                     <ul class="list-inline m-0 p-0">
                         @foreach ($bestsellers as $product)
-                            @include('components.vertical_card', ['product' => $product])
+                            @include('components.vertical-card', ['product' => $product])
                         @endforeach
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
                 <div style="overflow-x: auto; white-space: nowrap;">
                     <ul class="list-inline m-0 p-0">
                         @foreach ($newcomers as $product)
-                            @include('components.vertical_card', ['product' => $product])
+                            @include('components.vertical-card', ['product' => $product])
                         @endforeach
                     </ul>
                 </div>
@@ -67,7 +67,7 @@
                 <div style="overflow-x: auto; white-space: nowrap;">
                     <ul class="list-inline m-0 p-0">
                         @foreach ($trending as $product)
-                            @include('components.vertical_card', ['product' => $product])
+                            @include('components.vertical-card', ['product' => $product])
                         @endforeach
                     </ul>
                 </div>
