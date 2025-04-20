@@ -30,19 +30,16 @@
             @foreach($items as $p)
                 @include('components.cart-item', ['p' => $p])
             @endforeach
-        @endif
+            <hr>
+            <div class="d-flex justify-content-between">
+                <span class="text-dark fw-bold fs-4">Total</span>
+                <span id="total-price" class="text-secondary fw-bold fs-4">
+                    {{ number_format($total ?? 0, 2) }}€
+                </span>
+            </div>
 
-        <hr>
-        <div class="d-flex justify-content-between">
-            <span class="text-dark fw-bold fs-4">Total</span>
-            <span id="total-price" class="text-secondary fw-bold fs-4">
-                {{ number_format($total ?? 0, 2) }}€
-            </span>
-        </div>
-
-        @if(!$items->isEmpty())
             <div class="text-end mt-3">
-                <a href="#" class="btn btn-primary px-4">Continue</a>
+                <a href="{{ route('delivery') }}" class="btn btn-primary px-4">Continue</a>
             </div>
         @endif
 

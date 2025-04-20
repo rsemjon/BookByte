@@ -6,27 +6,37 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DeliveryController;
 
-
+// home
 Route::get('/', [ProductController::class, 'showHomeProducts'])->name('home');
 
+// login and register
 Route::get('login', [LoginController::class, 'displayLogin'])->name('display.login');
 Route::get('register', [RegisterController::class, 'displayRegister'])->name('display.register');
 Route::post('login', [LoginController::class, 'loginUser'])->name('login');
 Route::post('register', [RegisterController::class, 'registerUser'])->name('register');
 Route::post('logout', [LoginController::class, 'logoutUser'])->name('logout');
 
-//Route::view('profile', 'profile')->name('profile');
+// profile
 Route::get('/profile', function () {
     return view('profile'); 
 })->middleware('auth')->name('profile');
 
+// products
 Route::get('products', [ProductController::class, 'showAllProducts'])->name('allProducts');
 Route::get('/product/{id}', [ProductController::class, 'showSpecificProduct'])->name('show.product');
 
+// cart
 Route::get ('/cart', [CartController::class,'index' ])->name('cart');
 Route::post('/cart/add/{product}', [CartController::class,'add'   ])->name('cart.add');
 Route::post('/cart/update/{product}', [CartController::class,'update'])->name('cart.update');
 Route::post('/cart/remove/{product}', [CartController::class,'remove'])->name('cart.remove');
 
+// delivery
+Route::get ('/delivery',  [DeliveryController::class,'show'])->name('delivery');
+Route::post('/delivery',  [DeliveryController::class,'store'])->name('delivery.store');
 
+Route::get('/payment', function () {
+    return 'Payment page coming soon...';
+})->name('payment');
