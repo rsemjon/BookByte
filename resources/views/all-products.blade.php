@@ -163,22 +163,26 @@
                     <ul class="pagination mb-0">
                         <!-- First page link -->
                         <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
-                            <a class="page-link text-start text-secondary" href="{{ $products->url(1) }}">First</a>
+                            <a class="page-link text-start text-secondary" href="{{ $products->appends(request()->query())->url(1) }}">First</a>
                         </li>
 
                         <!-- Page range -->
-                        @foreach ($products->getUrlRange($products->currentPage()-2, $products->currentPage()+2) as $page => $url)
-                            @if ($page >= 1 && $page <= $products->lastPage())
-                                <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
-                                    <a class="page-link {{ $products->currentPage() == $page ? 'bg-primary text-white border-primary' : 'text-secondary' }}" href="{{ $url }}">
-                                        {{ $page }}
-                                    </a>
-                                </li>
-                            @endif
+                        @foreach ($products->getUrlRange(
+                            max(1, $products->currentPage()-2),
+                            min($products->lastPage(), $products->currentPage()+2)
+                        ) as $page => $dummy)
+                            @php
+                                $url = $products->appends(request()->query())->url($page);
+                            @endphp
+                            <li class="page-item {{ $products->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link {{ $products->currentPage() == $page ? 'bg-primary text-white border-primary' : 'text-secondary' }}" href="{{ $url }}">
+                                    {{ $page }}
+                                </a>
+                            </li>
                         @endforeach
 
                         <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
-                            <a class="page-link text-start text-secondary" href="{{ $products->url($products->lastPage()) }}">Last</a>
+                            <a class="page-link text-start text-secondary" href="{{ $products->appends(request()->query())->url($products->lastPage()) }}">Last</a>
                         </li>
                     </ul>
                 </div>

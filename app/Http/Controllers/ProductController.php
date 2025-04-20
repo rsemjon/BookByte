@@ -29,8 +29,8 @@ class ProductController extends Controller
         $availableLanguages = Product::select('language')->distinct()->pluck('language')->sort()->values();
         $availableAuthors = Product::select('author')->distinct()->pluck('author')->sort()->values();
 
-        $minPrice = Product::min('price');
-        $maxPrice = Product::max('price');
+        $minPrice = floor(Product::min('price'));
+        $maxPrice = ceil(Product::max('price'));
 
         $all = DB::table('products')
         ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')

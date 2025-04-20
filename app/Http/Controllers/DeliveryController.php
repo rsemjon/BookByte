@@ -9,32 +9,31 @@ use Illuminate\Support\Facades\Auth;
 class DeliveryController extends Controller
 {
     public function show()
-{
-    $order = Order::where('user_id', Auth::id())
-        ->where('order_status', 'IN_PROGRESS')
-        ->first();
+    {
+        $order = Order::where('user_id', Auth::id())
+            ->where('order_status', 'IN_PROGRESS')
+            ->first();
 
-    $dropBoxes = [
-        'Bratislava - Šancová 112',
-        'Košice - Trieda SNP 78',
-        'Žilina - Hlavná 55',
-    ];
+        $dropBoxes = [
+            'Bratislava - Šancová 112',
+            'Košice - Trieda SNP 78',
+            'Žilina - Hlavná 55',
+        ];
 
-    $stores = [
-        'Bratislava - Eurovea Mall',
-        'Košice - Aupark Shopping Center',
-        'Nitra - OC Mlyny',
-    ];
+        $stores = [
+            'Bratislava - Eurovea Mall',
+            'Košice - Aupark Shopping Center',
+            'Nitra - OC Mlyny',
+        ];
 
-    return view('delivery', [
-        'order' => $order,
-        'dropBoxes' => $dropBoxes,
-        'stores' => $stores,
-        'selectedDropBox' => $order?->delivery_method === 'DROP_BOX' ? "{$order->city} - {$order->address}" : null,
-        'selectedStore' => $order?->delivery_method === 'STORE' ? "{$order->city} - {$order->address}" : null,
-    ]);
-}
-
+        return view('delivery', [
+            'order' => $order,
+            'dropBoxes' => $dropBoxes,
+            'stores' => $stores,
+            'selectedDropBox' => $order?->delivery_method === 'DROP_BOX' ? "{$order->city} - {$order->address}" : null,
+            'selectedStore' => $order?->delivery_method === 'STORE' ? "{$order->city} - {$order->address}" : null,
+        ]);
+    }
 
     public function store(Request $rq)
     {
@@ -53,7 +52,14 @@ class DeliveryController extends Controller
             'DROP_BOX' => 'dropbox',
             'STORE' => 'store',
         };
-
+        
+        $rq->validate([
+            "first_name_$prefix" => 'required|string|max:255',
+            "last_name_$prefix" => 'required|string|max:255',
+            "email_address_$prefix" => 'required|email|max:255',
+            "phone_number_$prefix" => 'required|string|max:30',
+        ]);
+        
         $order->first_name = $rq->input("first_name_$prefix");
         $order->last_name = $rq->input("last_name_$prefix");
         $order->email_address = $rq->input("email_address_$prefix");
