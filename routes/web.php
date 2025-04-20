@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\PaymentController;
 
 // home
 Route::get('/', [ProductController::class, 'showHomeProducts'])->name('home');
@@ -29,7 +30,7 @@ Route::get('/product/{id}', [ProductController::class, 'showSpecificProduct'])->
 
 // cart
 Route::get ('/cart', [CartController::class,'index' ])->name('cart');
-Route::post('/cart/add/{product}', [CartController::class,'add'   ])->name('cart.add');
+Route::post('/cart/add/{product}', [CartController::class,'add' ])->name('cart.add');
 Route::post('/cart/update/{product}', [CartController::class,'update'])->name('cart.update');
 Route::post('/cart/remove/{product}', [CartController::class,'remove'])->name('cart.remove');
 
@@ -37,6 +38,11 @@ Route::post('/cart/remove/{product}', [CartController::class,'remove'])->name('c
 Route::get ('/delivery',  [DeliveryController::class,'show'])->name('delivery');
 Route::post('/delivery',  [DeliveryController::class,'store'])->name('delivery.store');
 
-Route::get('/payment', function () {
-    return 'Payment page coming soon...';
-})->name('payment');
+// payment
+Route::get('/checkout/payment', [PaymentController::class, 'show'])->name('payment');
+Route::post('/checkout/payment', [PaymentController::class, 'store'])->name('payment.store');
+
+// confirmation
+Route::get('/confirmation', function () {
+    return 'Confirmation page coming soon...';
+})->name('confirmation');
