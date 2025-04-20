@@ -84,6 +84,10 @@ class DeliveryController extends Controller
 
         $order->save();
 
+        if (!Auth::check()) {
+            session(['order_id' => $order->id]);
+        }
+
         return redirect()->route('payment');
     }
 }

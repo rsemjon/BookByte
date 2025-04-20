@@ -100,6 +100,7 @@
                        value="{{ old('email_address_dropbox', $order->email_address ?? '') }}">
 
                 <!-- Drop Boxes -->
+                <label for="address" class="form-label">Available Drop Boxes</label>
                 @foreach($dropBoxes as $box)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="dropBox" value="{{ $box }}"
@@ -138,6 +139,7 @@
                        value="{{ old('email_address_store', $order->email_address ?? '') }}">
 
                 <!-- Stores -->
+                <label for="address" class="form-label">Available Stores</label>
                 @foreach($stores as $store)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="storePickup" value="{{ $store }}"

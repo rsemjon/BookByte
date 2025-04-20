@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ConfirmationController;
 
 // home
 Route::get('/', [ProductController::class, 'showHomeProducts'])->name('home');
@@ -43,6 +44,5 @@ Route::get('/checkout/payment', [PaymentController::class, 'show'])->name('payme
 Route::post('/checkout/payment', [PaymentController::class, 'store'])->name('payment.store');
 
 // confirmation
-Route::get('/confirmation', function () {
-    return 'Confirmation page coming soon...';
-})->name('confirmation');
+Route::get('/confirmation', [ConfirmationController::class, 'show'])->name('confirmation');
+Route::post('/confirmation/confirm', [ConfirmationController::class, 'confirm'])->name('confirmation.confirm');

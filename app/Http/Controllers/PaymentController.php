@@ -29,7 +29,11 @@ class PaymentController extends Controller
 
         $order->payment_method = $request->paymentMethod;
         $order->save();
-
-        return redirect()->route('confirmation');
+            
+        if (!Auth::check()) {
+            session(['order_id' => $order->id]);
+        }
+            
+        return redirect()->route('confirmation');  
     }
 }
