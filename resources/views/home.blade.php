@@ -22,7 +22,7 @@
     <div class="bg-white shadow-sm align-items-center justify-content-center">
         <div class="container d-flex align-items-center justify-content-center">
             <h1 class="text-dark display-5 me-4">Welcome to BookByte!</h1>
-            <img src="/images/banner.png" class="w-25" alt="Banner">
+            <img src="/images/mascots/welcome.png" class="w-25" alt="Welcome Mascot">
         </div>
     </div>
 

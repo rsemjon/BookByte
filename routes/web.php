@@ -5,6 +5,8 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+
 
 Route::get('/', [ProductController::class, 'showHomeProducts'])->name('home');
 
@@ -22,5 +24,9 @@ Route::get('/profile', function () {
 Route::get('products', [ProductController::class, 'showAllProducts'])->name('allProducts');
 Route::get('/product/{id}', [ProductController::class, 'showSpecificProduct'])->name('show.product');
 
+Route::get ('/cart', [CartController::class,'index' ])->name('cart');
+Route::post('/cart/add/{product}', [CartController::class,'add'   ])->name('cart.add');
+Route::post('/cart/update/{product}', [CartController::class,'update'])->name('cart.update');
+Route::post('/cart/remove/{product}', [CartController::class,'remove'])->name('cart.remove');
 
 

@@ -18,15 +18,15 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email_address')->nullable();
-            $table->string('address');
-            $table->string('city');
-            $table->string('postal_code');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
 
             $table->enum('order_status', [
                 'FINISHED', 'IN_PROGRESS'
             ]);
 
-            $table->enum('payment_method', ['CASH', 'CREDIT_CARD', 'ONLINE_PAYMENT']);
+            $table->enum('payment_method', ['CASH', 'CREDIT_CARD', 'ONLINE_PAYMENT'])->nullable();;
             $table->timestamps();
 
         });

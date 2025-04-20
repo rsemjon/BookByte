@@ -57,10 +57,9 @@
         </a>
 
         <!-- Shopping Cart -->
-        <a href="#" class="nav-link text-white">
-          <i class="fas fa-shopping-cart fa-2x"></i>
+        <a href="{{ route('cart') }}" class="nav-link text-white">
+          <i class="fas fa-shopping-cart fa-2x text-white"></i>
         </a>
-
       </div>
     </div>
   </div>

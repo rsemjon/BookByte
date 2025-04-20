@@ -35,7 +35,7 @@
                     <!-- Sign In -->
                      <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button class="text-decoration-none text-primary fs-5 d-flex align-items-center col-12 col-md-auto mt-2 mt-md-0 justify-content-md-end">
+                        <button class="border-0 bg-transparent text-primary fs-5 d-flex align-items-center col-12 col-md-auto mt-2 mt-md-0 justify-content-md-end">
                             Log out
                             <i class="bi bi-box-arrow-in-right ms-2 fs-3"></i>
                         </button>
