@@ -15,9 +15,4 @@
     </div>
 </div>
 
-<script>
-    setTimeout(() => {
-        const modal = document.getElementById('success-modal-overlay');
-        if (modal) modal.remove();
-    }, 4000);
-</script>
+<script src="{{ asset('js/alert.js') }}"></script>
