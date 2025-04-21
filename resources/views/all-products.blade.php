@@ -151,11 +151,18 @@
 
                 <!-- All Products -->
                 <div id="products" class="flex-grow-1 mb-4">
-                    <div class="row row-cols-1 row-cols-md-2 g4">
-                    @foreach($products as $product)
-                        @include('components.horizontal-card', ['product' => $product])
-                    @endforeach
-                    </div>
+                    @if ($products->isEmpty())
+                        <div class="text-center mt-5">
+                            <img src="{{ asset('images/mascots/products.png') }}" alt="Empty Products Mascot" style="max-width: 350px; width: 100%;">
+                            <p class="text-dark fw-bold fs-5 mb-5">Oops, no products match your filters!</p>
+                        </div>
+                    @else
+                        <div class="row row-cols-1 row-cols-md-2 g4">
+                            @foreach($products as $product)
+                                @include('components.horizontal-card', ['product' => $product])
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Pagination -->
