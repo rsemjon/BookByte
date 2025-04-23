@@ -43,12 +43,10 @@
             <!-- Loop through query parameters except 'searched_value' and 'page' -->
             @foreach(request()->except(['searched_value', 'page']) as $key => $value)
                 @if(is_array($value))
-                    <!-- If the filter value is an array, loop through each value and create multiple hidden inputs -->
                     @foreach($value as $item)
                         <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
                     @endforeach
                 @else
-                    <!-- If it's a single value, pass it as a hidden input -->
                     <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                 @endif
             @endforeach
