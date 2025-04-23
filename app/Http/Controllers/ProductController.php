@@ -32,9 +32,21 @@ class ProductController extends Controller
         $minPrice = floor(Product::min('price'));
         $maxPrice = ceil(Product::max('price'));
 
-        $all = DB::table('products')
-        ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
-        ->select('products.*', 'pi.image');
+        $searched_text=$request->input('searched_value');
+        
+        if ($searched_text) {
+            $all = DB::table('products')
+            ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
+            ->where('title', 'ILIKE', "%{$searched_text}%")
+            ->orWhere('author', 'ILIKE', "%{$searched_text}%")
+            ->select('products.*', 'pi.image');
+        }
+        else{
+            $all = DB::table('products')
+            ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
+            ->select('products.*', 'pi.image');
+    
+        }
 
         if ($request->has('language') && is_array($request->language)) {
             $languages = array_map('strtolower', $request->language);

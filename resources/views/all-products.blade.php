@@ -59,6 +59,9 @@
             <aside class="col-md-3 pe-5">
                 <h3 class="fw-bold">Filters</h3>
                 <form method="GET" action="{{ route('allProducts') }}">
+                @if(request('searched_value'))
+                    <input type="hidden" name="searched_value" value="{{ request('searched_value') }}">
+                @endif
 
                     <!-- Price -->
                     <div class="mb-3">
@@ -93,6 +96,7 @@
                                 <i class="bi bi-chevron-down"></i>
                             </button>
                         </div>
+
                         <div id="genreFilters" class="mt-2" style="display: none;">
                             @foreach($availableGenres as $genre)
                             <div class="form-check">

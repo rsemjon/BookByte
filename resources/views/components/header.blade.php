@@ -37,15 +37,19 @@
       <!-- Right Part -->
       <div class="d-flex align-items-center">
 
+      
+
         <!-- Search -->
-        <form class="d-flex me-3">
+        <form method="GET" action="{{ route('allProducts') }}">
           <div class="input-group">
             <input
               type="text"
+              name="searched_value"
               class="form-control"
               placeholder="Search..."
+              value = "{{ request('searched_value')}}"
             />
-            <button class="btn btn-outline-light" type="button">
+            <button class="btn btn-outline-light" type="submit">
               <i class="fas fa-search text-light"></i>
             </button>
           </div>
