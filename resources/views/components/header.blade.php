@@ -37,22 +37,34 @@
       <!-- Right Part -->
       <div class="d-flex align-items-center">
 
-      
 
         <!-- Search -->
         <form method="GET" action="{{ route('allProducts') }}">
-          <div class="input-group">
-            <input
-              type="text"
-              name="searched_value"
-              class="form-control"
-              placeholder="Search..."
-              value = "{{ request('searched_value')}}"
-            />
-            <button class="btn btn-outline-light" type="submit">
-              <i class="fas fa-search text-light"></i>
-            </button>
-          </div>
+            <!-- Loop through query parameters except 'searched_value' and 'page' -->
+            @foreach(request()->except(['searched_value', 'page']) as $key => $value)
+                @if(is_array($value))
+                    <!-- If the filter value is an array, loop through each value and create multiple hidden inputs -->
+                    @foreach($value as $item)
+                        <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
+                    @endforeach
+                @else
+                    <!-- If it's a single value, pass it as a hidden input -->
+                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                @endif
+            @endforeach
+
+            <div class="input-group">
+                <input
+                    type="text"
+                    name="searched_value"
+                    class="form-control"
+                    placeholder="Search..."
+                    value="{{ request('searched_value') }}"
+                />
+                <button class="btn btn-outline-light" type="submit">
+                    <i class="fas fa-search text-light"></i>
+                </button>
+            </div>
         </form>
 
         <!-- Profile -->
