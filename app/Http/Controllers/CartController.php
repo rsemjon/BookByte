@@ -85,9 +85,9 @@ class CartController extends Controller
             ->where('order_id', $order->id)
             ->sum('quantity');
 
-        return $request->ajax()
+            return $request->ajax()
             ? response()->json(['ok' => true, 'totalQty' => $totalQty])
-            : back()->with('ok', 'Added to cart');
+            : redirect()->back()->with('success', 'Super, added to your cart!');
     }
 
     public function update(Request $request, Product $product)

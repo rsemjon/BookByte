@@ -12,7 +12,7 @@
     </div>
 
     <span class="text-secondary fw-bold flex-shrink-0">
-        {{ number_format($product->price * $product->pivot->quantity, 2) }}€
+        {{ number_format($product->price, 2) }}€
     </span>
 
     <span class="text-muted ms-2 flex-shrink-0"

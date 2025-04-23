@@ -96,7 +96,7 @@ class ProductController extends Controller
             ->where('product_id', $id)
             ->pluck('image')
             ->toArray();  
-        return view('one-product', compact('product', 'photosUrls'));
+        return view('product', compact('product', 'photosUrls'));
     }
 
     public function showHomeProducts()
