@@ -33,7 +33,7 @@ class ProductController extends Controller
         $maxPrice = ceil(Product::max('price'));
 
         $searched_text=$request->input('searched_value');
-        
+
         if ($searched_text) {
             $all = DB::table('products')
             ->join(DB::raw('(SELECT DISTINCT ON (product_id) * FROM product_image ORDER BY product_id, id ASC) AS pi'), 'products.id', '=', 'pi.product_id')
@@ -99,6 +99,17 @@ class ProductController extends Controller
         return view('product', compact('product', 'photosUrls'));
     }
 
+    public function showEditSpecificProduct(Request $req, $id){
+        $product = Product::findOrFail($id);
+        $id = $product->id;
+        $photosUrls = DB::table('product_image')
+            ->where('product_id', $id)
+            ->pluck('image')
+            ->toArray();  
+        return view('edit-product', compact('product', 'photosUrls'));
+
+    }
+
     public function showHomeProducts()
     {
         // image query
@@ -131,6 +142,26 @@ class ProductController extends Controller
             ->get();
 
         return view('home', compact('bestsellers', 'newcomers', 'trending'));
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+
+        $product = Product::findOrFail($id);
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'description' => 'required|string',
+            'genre' => 'required|string|max:255',
+            'language' => 'required|in:Slovak,Russian,English,German', // must be one of these
+            'price' => 'required|numeric|min:0|max:99999999.99', // match decimal(10,2)
+            'in_stock' => 'required|integer|min:0',
+        ]);
+
+        $product->update($data);  
+
+        // Redirect back with a success message
+        return redirect()->route('show.edit.product', ['id' => $product->id]);
     }
 
 }
