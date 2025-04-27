@@ -42,6 +42,15 @@
                 </ol>
             </nav>
         </div>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+        @endif
 
         <div class="col-md-8 col-12 d-flex flex-column align-items-center mx-auto">
 
@@ -64,9 +73,25 @@
             <input type="file" id="hiddenImageInput" accept="image/*" multiple style="display: none;" />
 
             <!-- Product Form -->
-            <form class="w-100" id="productForm" action="{{ route('update.product', $product->id) }}" method="POST">
+            <form class="w-100" id="productForm" action="{{ route('update.product', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') 
+
+                <!-- <div class="mb-3">
+                    <label for="productPhotos" class="form-label">Photos</label>
+
+                    <div class="d-flex overflow-auto gap-3 p-2 border rounded" style="white-space: nowrap;">
+                        @foreach($photosUrls as $url)
+                            <div class="flex-shrink-0">
+                                <img src="/{{ $url }}" alt="{{$url}}" class="img-thumbnail" style="width: 300px; height: auto;">
+                            </div>
+                        @endforeach
+                    </div>
+
+                </div> -->
+                <div class="mb-3">
+                <input type="file" name="photos[]" class="form-control border border-2 border-dark" id="productPhotos" multiple />
+                </div>
 
                 <div class="mb-3">
                     <label for="productTitle" class="form-label">Title</label>

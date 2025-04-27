@@ -158,6 +158,22 @@ class ProductController extends Controller
             'in_stock' => 'required|integer|min:0',
         ]);
 
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $customPath = public_path('images/books/' . $photo->getClientOriginalName());
+            
+                $photo->move(public_path('images/books'), $photo->getClientOriginalName());
+    
+                DB::table('product_image')->insert([
+                    'product_id' => $product->id,
+                    'image' => 'images/books/' . $photo->getClientOriginalName(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
         $product->update($data);  
 
         // Redirect back with a success message
