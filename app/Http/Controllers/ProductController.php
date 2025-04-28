@@ -180,6 +180,54 @@ class ProductController extends Controller
         return redirect()->route('show.edit.product', ['id' => $product->id]);
     }
 
+    public function addProduct(Request $request)
+    
+    {
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'description' => 'required|string',
+            'genre' => 'required|string|max:255',
+            'language' => 'required|in:Slovak,Russian,English,German', // must be one of these
+            'price' => 'required|numeric|min:0|max:99999999.99', // match decimal(10,2)
+            'in_stock' => 'required|integer|min:0',
+        ]);
+
+        $product = Product::create([
+            'title' => $data['title'],
+            'author' => $data['author'],
+            'description' => $data['description'],
+            'genre' => $data['genre'],
+            'language' => $data['language'],
+            'price' => $data['price'],
+            'in_stock' => $data['in_stock'],
+        ]);
+
+        if ($product){
+            if ($request->hasFile('photos')) {
+                foreach ($request->file('photos') as $photo) {
+                    $customPath = public_path('images/books/' . $photo->getClientOriginalName());
+                
+                    $photo->move(public_path('images/books'), $photo->getClientOriginalName());
+        
+                    DB::table('product_image')->insert([
+                        'product_id' => $product->id,
+                        'image' => 'images/books/' . $photo->getClientOriginalName(),
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('show.edit.product', ['id' => $product->id]);
+    }
+
+    public function showAddProduct()
+    {
+        return view('add-product');
+    }
+
     public function deletePhotoOfProduct(Request $request, $id)
     {
         

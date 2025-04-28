@@ -1,19 +1,20 @@
-Tasks that need to be done by control point phase:
 
-Ordering logic:
-- all cart functionalities(adding to cart, modifying cart, order information(delivery, personal...))
-- save cart together with all order information
-- save order into DB
-- !! CHECK IN GH - need to transfer the cart if user filled the cart and then logged in and he does not have any active cart stored
-
-
-Admin page:
 
 
 Adjustments for final submission:
 
 - responsivnes on small screen(300 px for some reason)
 - add section, article, header, footer tags
+- add unauthorized for admin pages
+- check if required in controller are coresponding to db - RADO
+- add to which product does img belong - OPTIONAL - RADO
+- refactor to services
+- add delete
+
+- if photo is different size than standardized then photo on all products is behaving weird - the same goes for edit product - ?
+
+
+Qiuestons for teacher: - at least two photos?
 
 
 

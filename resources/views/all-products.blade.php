@@ -147,6 +147,16 @@
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">Filter</button>
                         <a href="{{ route('allProducts') }}" class="btn btn-outline-primary">Clear</a>
+                        @auth
+                            @if(Auth::user()->role === 'admin')
+                                <li class="list-inline-item">
+                                    <a href="{{ route('show.add.product') }}" class="btn btn-outline-primary">
+                                        Add Product <i class="fas fa-edit ms-2"></i>
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
+                        
                     </div>
             </aside>
 
