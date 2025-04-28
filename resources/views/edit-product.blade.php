@@ -54,19 +54,45 @@
 
         <div class="col-md-8 col-12 d-flex flex-column align-items-center mx-auto">
 
-                    <div id="imagePreview" class="d-flex flex-wrap gap-3 mb-4">
-                    <div class="container my-4">
-            <h4 class="mb-3">Gallery</h4>
+            <div id="imagePreview" class="d-flex flex-wrap gap-3 mb-4">
+                <div class="container my-4">
+                    <h4 class="mb-3">Gallery</h4>
+                     <div class="d-flex overflow-auto gap-3 p-2 border rounded" style="white-space: nowrap;">
+                        @foreach($photosUrls as $url)
+                            <div class="photo-container position-relative flex-shrink-0" style="width: 300px;">
+                                <img src="/{{ $url }}" alt="{{ $url }}" class="img-thumbnail" style="width: 100%; height: auto;">
+                                <form action="{{ route('delete.photo', ['id' => $product->id]) }}" method="POST" class="position-absolute top-50 start-50 translate-middle">
+                                    @csrf
+                                    @method('DELETE') 
+                                    <input type="hidden" name="image_path" value="{{ $url }}">
+                                    <button type="submit" class="btn btn-primary photo-button position-absolute top-50 start-50 translate-middle">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        @endforeach
+                    </div> 
+                        
+                    <style>
+                        .photo-container .photo-button {
+                            opacity: 0 !important;
+                            transition: opacity 0.3s ease !important;
+                            background-color: #dc3545 !important; /* Bootstrap "danger" red */
+                            border-color: #dc3545 !important;
+                            color: #fff !important;
+                        }
+                        .photo-container:hover .photo-button {
+                            opacity: 1 !important;
+                        }
+                        .photo-container .photo-button:hover {
+                            background-color: #dc3545 !important;
+                            border-color: #dc3545 !important;
+                            color: #fff !important;
+                        }
+                    </style>
 
-            <div class="d-flex overflow-auto gap-3 p-2 border rounded" style="white-space: nowrap;">
-                @foreach($photosUrls as $url)
-                    <div class="flex-shrink-0">
-                        <img src="/{{ $url }}" alt="{{$url}}" class="img-thumbnail" style="width: 300px; height: auto;">
-                    </div>
-                @endforeach
+                </div>
             </div>
-        </div>
-        </div>
             
 
             <!-- Hidden file input -->
@@ -77,18 +103,41 @@
                 @csrf
                 @method('PUT') 
 
-                <!-- <div class="mb-3">
-                    <label for="productPhotos" class="form-label">Photos</label>
 
-                    <div class="d-flex overflow-auto gap-3 p-2 border rounded" style="white-space: nowrap;">
-                        @foreach($photosUrls as $url)
-                            <div class="flex-shrink-0">
-                                <img src="/{{ $url }}" alt="{{$url}}" class="img-thumbnail" style="width: 300px; height: auto;">
-                            </div>
-                        @endforeach
+                <!-- <div class="d-flex overflow-auto gap-3 p-2 border rounded" style="white-space: nowrap;">
+                @foreach($photosUrls as $url)
+                    <div class="photo-container position-relative flex-shrink-0" style="width: 300px;">
+                        <img src="/{{ $url }}" alt="{{ $url }}" class="img-thumbnail" style="width: 100%; height: auto;">
+                        
+                        <button class="btn btn-primary photo-button position-absolute top-50 start-50 translate-middle">
+                            Action
+                        </button>
                     </div>
-
+                @endforeach
                 </div> -->
+
+                
+            
+<!-- 
+            <style>
+                .photo-container .photo-button {
+                    opacity: 0 !important;
+                    transition: opacity 0.3s ease !important;
+                    background-color: #dc3545 !important; /* Bootstrap "danger" red */
+                    border-color: #dc3545 !important;
+                    color: #fff !important;
+                }
+                .photo-container:hover .photo-button {
+                    opacity: 1 !important;
+                }
+                .photo-container .photo-button:hover {
+                    background-color: #dc3545 !important;
+                    border-color: #dc3545 !important;
+                    color: #fff !important;
+                }
+            </style> -->
+               
+
                 <div class="mb-3">
                 <input type="file" name="photos[]" class="form-control border border-2 border-dark" id="productPhotos" multiple />
                 </div>

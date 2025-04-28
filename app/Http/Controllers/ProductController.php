@@ -180,4 +180,25 @@ class ProductController extends Controller
         return redirect()->route('show.edit.product', ['id' => $product->id]);
     }
 
+    public function deletePhotoOfProduct(Request $request, $id)
+    {
+        
+
+        
+        $image_path = $request->image_path;
+        $decoded = urldecode($image_path); 
+        $fullPath = public_path($decoded);
+    
+        if (file_exists($fullPath)) {
+             unlink($fullPath);
+        }
+
+        DB::table('product_image')
+            ->where('product_id', $id)
+            ->where('image', $decoded)
+            ->delete();
+
+        return redirect()->route('show.edit.product', ['id' => $id]);
+    }
+
 }

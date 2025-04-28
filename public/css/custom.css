@@ -254,3 +254,9 @@ footer .container {
     justify-content: space-between;
     align-items: center;
 }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black !important; /* For background */
+    fill: black !important; /* To change the color of the arrow itself */
+}

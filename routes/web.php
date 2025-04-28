@@ -30,6 +30,8 @@ Route::get('products', [ProductController::class, 'showAllProducts'])->name('all
 Route::get('/product/{id}', [ProductController::class, 'showSpecificProduct'])->name('show.product');
 Route::get('/product/edit/{id}', [ProductController::class, 'showEditSpecificProduct'])->name('show.edit.product');
 Route::put('/product/edit/update/{id}', [ProductController::class, 'updateProduct'])->name('update.product');
+Route::delete('/product/{id}/photo/delete/', [ProductController::class, 'deletePhotoOfProduct'])->name('delete.photo');
+
 // cart
 Route::get ('/cart', [CartController::class,'index' ])->name('cart');
 Route::post('/cart/add/{product}', [CartController::class,'add' ])->name('cart.add');
