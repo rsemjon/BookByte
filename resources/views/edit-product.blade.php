@@ -72,24 +72,6 @@
                             </div>
                         @endforeach
                     </div> 
-                        
-                    <style>
-                        .photo-container .photo-button {
-                            opacity: 0 !important;
-                            transition: opacity 0.3s ease !important;
-                            background-color: #dc3545 !important; /* Bootstrap "danger" red */
-                            border-color: #dc3545 !important;
-                            color: #fff !important;
-                        }
-                        .photo-container:hover .photo-button {
-                            opacity: 1 !important;
-                        }
-                        .photo-container .photo-button:hover {
-                            background-color: #dc3545 !important;
-                            border-color: #dc3545 !important;
-                            color: #fff !important;
-                        }
-                    </style>
 
                 </div>
             </div>
