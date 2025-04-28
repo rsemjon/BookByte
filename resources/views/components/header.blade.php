@@ -59,7 +59,7 @@
                     placeholder="Search..."
                     value="{{ request('searched_value') }}"
                 />
-                <button class="btn btn-outline-light" type="submit">
+                <button class="btn btn-outline-light me-3" type="submit">
                     <i class="fas fa-search text-light"></i>
                 </button>
             </div>
