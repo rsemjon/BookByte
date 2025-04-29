@@ -164,10 +164,16 @@
                     Save <i class="fas fa-save ms-2"></i>
                 </button>
 
-                <button type="button" class="btn btn-danger mt-4 w-100" id="deleteProductBtn">
+                
+            </form>
+            <form class="w-100" id="productForm" action="{{ route('delete.product', $product->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger mt-4 w-100" id="deleteProductBtn">
                     Delete <i class="fas fa-trash ms-2"></i>
                 </button>
             </form>
+            
         </div>
     </main>
 

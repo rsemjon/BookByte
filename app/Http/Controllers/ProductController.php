@@ -223,6 +223,34 @@ class ProductController extends Controller
         return redirect()->route('show.edit.product', ['id' => $product->id]);
     }
 
+    public function deleteProduct($id)
+    {
+
+        $images = DB::table('product_image')
+        ->where('product_id', $id)
+        ->pluck('image');
+
+
+
+        foreach ($images as $imagePath) {
+            $fullPath = public_path($imagePath);
+
+            
+            if (file_exists($fullPath)) {
+                unlink($imagePath);
+            }
+        }
+
+        DB::table('product_image')
+            ->where('product_id', $id)
+            ->delete();     
+        
+        $product = Product::findOrFail($id); 
+        $product->delete();
+
+        return redirect()->route('allProducts');
+    }
+
     public function showAddProduct()
     {
         return view('add-product');
@@ -230,8 +258,6 @@ class ProductController extends Controller
 
     public function deletePhotoOfProduct(Request $request, $id)
     {
-        
-
         
         $image_path = $request->image_path;
         $decoded = urldecode($image_path); 

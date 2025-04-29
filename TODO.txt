@@ -5,14 +5,11 @@ Adjustments for final submission:
 
 - responsivnes on small screen(300 px for some reason)
 - add section, article, header, footer tags
-- add unauthorized for admin pages
-- check if required in controller are coresponding to db - RADO
+- add unauthorized for admin pages - RADO
 - add to which product does img belong - OPTIONAL - RADO
 - refactor to services
-- add delete
-
-- if photo is different size than standardized then photo on all products is behaving weird - the same goes for edit product - ?
-
+- add adding back from original design  
+- enforce at leest two photos
 
 Qiuestons for teacher: - at least two photos?
 
