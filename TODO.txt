@@ -7,9 +7,9 @@ Adjustments for final submission:
 - add section, article, header, footer tags
 - add unauthorized for admin pages - RADO
 - add to which product does img belong - OPTIONAL - RADO
-- refactor to services
-- add adding back from original design  
-- enforce at leest two photos
+- refactor to services - RADO
+- add adding back from original design  - Anton
+- enforce at least two photos - RADO
 
 Qiuestons for teacher: - at least two photos?
 

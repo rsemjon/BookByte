@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     public function showAllProducts(Request $request)
@@ -100,6 +100,10 @@ class ProductController extends Controller
     }
 
     public function showEditSpecificProduct(Request $req, $id){
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized'); // returns the 403 Forbidden page
+        }
+
         $product = Product::findOrFail($id);
         $id = $product->id;
         $photosUrls = DB::table('product_image')
@@ -146,6 +150,11 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request, $id)
     {
+        
+
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized'); // returns the 403 Forbidden page
+        }
 
         $product = Product::findOrFail($id);
         $data = $request->validate([
@@ -183,6 +192,10 @@ class ProductController extends Controller
     public function addProduct(Request $request)
     
     {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized'); // returns the 403 Forbidden page
+        }
+
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
@@ -225,6 +238,10 @@ class ProductController extends Controller
 
     public function deleteProduct($id)
     {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized'); // returns the 403 Forbidden page
+        }
+
 
         $images = DB::table('product_image')
         ->where('product_id', $id)
@@ -253,11 +270,18 @@ class ProductController extends Controller
 
     public function showAddProduct()
     {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized'); // returns the 403 Forbidden page
+        }
         return view('add-product');
     }
 
     public function deletePhotoOfProduct(Request $request, $id)
     {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized'); // returns the 403 Forbidden page
+        }
+
         
         $image_path = $request->image_path;
         $decoded = urldecode($image_path); 

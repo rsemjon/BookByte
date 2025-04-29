@@ -54,9 +54,12 @@
             
 
             <!-- Hidden file input -->
+            <!-- <input type="file" id="hiddenImageInput" accept="image/*" multiple style="display: none;" /> -->
+
+            <div id="imagePreview" class="d-flex flex-wrap gap-3 mb-4"></div>
+
             <input type="file" id="hiddenImageInput" accept="image/*" multiple style="display: none;" />
 
-            <!-- Product Form -->
             <form class="w-100" id="productForm" action="{{ route('add.product') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
@@ -112,6 +115,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/sort.js"></script>
+    <script src="/js/admin-product.js"></script>
 </body>
 
 </html>
