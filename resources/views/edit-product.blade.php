@@ -52,8 +52,9 @@
             </div>
         @endif
 
+        
         <div class="col-md-8 col-12 d-flex flex-column align-items-center mx-auto">
-
+            <h1>Edit product</h1>
             <div id="imagePreview" class="d-flex flex-wrap gap-3 mb-4">
                 <div class="container my-4">
                     <h4 class="mb-3">Gallery</h4>

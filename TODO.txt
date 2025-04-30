@@ -1,17 +1,24 @@
 
+For ANTON:
+
+From Krajcovic:
+- responsivnes on small screen(300 px for some reason...wtf why 300px??)
+- add section, article, header, footer tags somewhere
+- a lot of free space from sides of page(not neccessary i think, only if you would want to)
+
+Adding product and editing product:
+- Change your javascript, that was creating add button for images and at the same time it adjusted photo into desired shape.
+    Currntly it has functionalities that are handled by php(edit and add page are separate, loading images and saving is handled by php etc.)
+- Add functionality to enforce that user needs to add AT LEAST two photos when creating new product(it is one of the condition on GH).
+- For cart functionalities, make sure that fields for order cannot be filled with inproper values(like phone number having letters etc.)
+
+Also, please test admin functionality, if it works, if any problem let me know and i will fix it!
+
+If there is anything you would like to change, go for it.
+Also we will go over the docs, but that shouldnt be a problem.
 
 
-Adjustments for final submission:
 
-- responsivnes on small screen(300 px for some reason)
-- add section, article, header, footer tags
-- add unauthorized for admin pages - RADO
-- add to which product does img belong - OPTIONAL - RADO
-- refactor to services - RADO
-- add adding back from original design  - Anton
-- enforce at least two photos - RADO
-
-Qiuestons for teacher: - at least two photos?
 
 
 
