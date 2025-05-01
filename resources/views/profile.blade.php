@@ -1,4 +1,4 @@
-<!-- profile.html -->
+{{-- components/profile.blade.php --}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,71 +19,93 @@
 
     <!-- Header -->
     @include('components.header')
-    <!-- Main Content -->
+
+    <!-- Main -->
     <main class="container flex-fill mt-5 pt-4 pb-5 mb-5">
+        
+        <!-- Section -->
+        <section class="container d-flex justify-content-center p-0">
 
-        <!-- Profile Information -->
-        <div class="container d-flex justify-content-center p-0">
-
+            <!-- Profile Information -->
             <div class="w-100">
 
                 <hr>
 
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-0">
+
                     <h3 class="fw-bold col-12 col-md-auto">Profile</h3>
 
-                    <!-- Sign In -->
+                    <!-- Log Out -->
                      <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="border-0 bg-transparent text-primary fs-5 d-flex align-items-center col-12 col-md-auto mt-2 mt-md-0 justify-content-md-end">
-                            Log out
+                            Log Out
                             <i class="bi bi-box-arrow-in-right ms-2 fs-3"></i>
                         </button>
                     </form>
+
                 </div>
 
+                <!-- Fields -->
                 <form>
+                    
+                    <!-- Top Row -->
                     <div class="row mt-4">
+
+                        <!-- First Name -->
                         <div class="col-md-4">
                             <label for="name" class="form-label">First Name</label>
-                            <input type="text" class="form-control border border-2 border-dark" id="name"
-                                placeholder="{{ Auth::user()->name }}" required>
+                            <input type="text" class="form-control border border-2 border-dark" id="name" placeholder="{{ Auth::user()->name }}" required>
                         </div>
+
+                        <!-- Second Name -->
                         <div class="col-md-4">
                             <label for="second_name" class="form-label">Second Name</label>
-                            <input type="text" class="form-control border border-2 border-dark" id="second_name"
-                                placeholder="{{ Auth::user()->last_name }}" required>
+                            <input type="text" class="form-control border border-2 border-dark" id="second_name" placeholder="{{ Auth::user()->last_name }}" required>
                         </div>
+
+                        <!-- Date of Birth -->
                         <div class="col-md-4">
                             <label for="birth_date" class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control border border-2 border-dark" id="birth_date"
-                                placeholder="{{ Auth::user()->birth_date }}"
-                                required>
+                            <input type="date" class="form-control border border-2 border-dark" id="birth_date" placeholder="{{ Auth::user()->birth_date }}" required>
                         </div>
+
                     </div>
+
+                    <!-- Bottom Row -->
                     <div class="row mt-4">
+
+                        <!-- Email -->
                         <div class="col-md-4">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control border border-2 border-dark" id="email"
-                                placeholder="{{ Auth::user()->email }}" required>
+                            <input type="email" class="form-control border border-2 border-dark" id="email" placeholder="{{ Auth::user()->email }}" required>
                         </div>
+
+                        <!-- Phone Number -->
                         <div class="col-md-4">
                             <label for="phone_number" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control border border-2 border-dark" id="phone_number"
-                                placeholder="{{ Auth::user()->phone_number }}" required>
+                            <input type="tel" class="form-control border border-2 border-dark" id="phone_number" placeholder="{{ Auth::user()->phone_number }}" required>
                         </div>
+
+                        <!-- Save Button -->
                         <div class="col-md-4 col-12 d-flex align-items-end mt-3 mt-md-0">
                             <button type="submit" class="btn btn-primary w-100">
                                 Save Changes
                             </button>
                         </div>
-                    </div>
-                </form>
-            </div>
-        </div>
 
-        <!-- Password Section -->
-        <div class=" container d-flex justify-content-center p-0 mt-5">
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Section -->
+        <section class=" container d-flex justify-content-center p-0 mt-5">
+
+            <!-- Password Information -->
             <div class="w-100">
 
                 <hr>
@@ -92,32 +114,39 @@
 
                 <form>
                     <div class="row mt-4">
+
+                        <!-- New Password -->
                         <div class="col-md-4">
                             <label for="password" class="form-label">New Password</label>
-                            <input type="password" class="form-control border border-2 border-dark" id="password"
-                                placeholder="Enter your new password" required>
+                            <input type="password" class="form-control border border-2 border-dark" id="password" placeholder="Enter your new password" required>
                         </div>
+
+                        <!-- Confirm Password -->
                         <div class="col-md-4">
                             <label for="confirm_password" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control border border-2 border-dark"
-                                id="confirm_password" placeholder="Confirm your password" required>
+                            <input type="password" class="form-control border border-2 border-dark" id="confirm_password" placeholder="Confirm your password" required>
                         </div>
+                        
+                        <!-- Update Button -->
                         <div class="col-md-4 col-12 d-flex align-items-end mt-3 mt-md-0">
                             <button type="submit" class="btn btn-primary w-100">
                                 Update Password
                             </button>
                         </div>
+
                     </div>
                 </form>
+
             </div>
-        </div>
+            
+        </section>
 
     </main>
 
     <!-- Footer -->
     @include('components.footer')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

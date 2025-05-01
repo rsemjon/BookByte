@@ -11,7 +11,6 @@ use App\Services\ProductService;
 class ProductController extends Controller
 {
     public function showAllProducts(Request $request, ProductService $productService)
-
     {
         $data = $productService->getAllProductsData($request);
         return view('all-products', $data);

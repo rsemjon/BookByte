@@ -286,7 +286,7 @@ footer .container {
 .add-product{
     border: 2px solid var(--secondary);
     width: 100%;
-    min-height: 252px;
+    min-height: 255px;
 
     display: flex;
     align-items: center;

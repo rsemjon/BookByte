@@ -1,4 +1,4 @@
-<!-- register.html -->
+{{-- components/register.blade.php --}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,41 +18,46 @@
     <!-- Header -->
     @include('components.header')
 
-    <!-- Main Content -->
+    <!-- Main -->
     <main class="container flex-fill mt-5 pt-4 pb-5 mb-5">
-        <hr>
-        <ul class="list-inline d-flex align-items-center justify-content-center">
-            <li class="list-inline-item me-3">
-                <h3 class="fw-bold">Register</h3>
-            </li>
-        </ul>
 
-        <div class="container d-flex justify-content-center">
+        <hr>
+
+        <h3 class="fw-bold text-center">Register</h3>
+
+        <!-- Section -->
+        <section class="container d-flex justify-content-center">
             <div class="w-50">
                 <form action="{{ route ('register') }}" method="POST">
+
                     @csrf
+
+                    <!-- First Name -->
                     <div class="mb-3">
                         <label for="name" class="form-label">First Name</label>
-                        <input type="text" name="name" class="form-control border border-2 border-dark" id="firstName"
-                            placeholder="Enter your first name" required>
+                        <input type="text" name="name" class="form-control border border-2 border-dark" id="firstName" placeholder="Enter your first name" required>
                     </div>
+
+                    <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control border border-2 border-dark" id="email"
-                            placeholder="Enter your email" required>
+                        <input type="email" name="email" class="form-control border border-2 border-dark" id="email" placeholder="Enter your email" required>
                     </div>
+
+                    <!-- Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control border border-2 border-dark" id="password"
-                            placeholder="Enter your password" required>
+                        <input type="password" name="password" class="form-control border border-2 border-dark" id="password" placeholder="Enter your password" required>
                     </div>
+
+                    <!-- Confirm Password -->
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control border border-2 border-dark" id="confirmPassword"
-                            placeholder="Confirm your password" required>
+                        <input type="password" name="password_confirmation" class="form-control border border-2 border-dark" id="confirmPassword" placeholder="Confirm your password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Register</button>
 
+                    <!-- Register Button -->
+                    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Register</button>
 
                     @if($errors->any())
                         <ul>
@@ -61,22 +66,31 @@
                             @endforeach
                         </ul>
                     @endif
+
                 </form>
             </div>
-        </div>
+        </section>
+
+        <!-- Social Register -->
         <h5 class="text-center mt-3">Or continue with</h5>
 
         <div class="container d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 pt-4">
+            
+            <!-- Google -->
             <a href="#" class="btn btn-dark w-auto d-flex align-items-center justify-content-center px-4 py-2">
                 <span class="me-2">Google</span>
                 <i class="bi bi-google"></i>
             </a>
+
+            <!-- Apple -->
             <a href="#" class="btn btn-dark w-auto d-flex align-items-center justify-content-center px-4 py-2">
                 <span class="me-2">Apple</span>
                 <i class="bi bi-apple"></i>
             </a>
+
         </div>
 
+        <!-- Login Redirection -->
         <p class="text-center mt-5">
             Already have an account?
             <a href="{{ route('display.login') }}" class="text-decoration-none text-primary"><strong>Log In here!</strong></a>

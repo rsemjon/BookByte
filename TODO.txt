@@ -2,7 +2,6 @@ For ANTON:
 
 From Krajcovic:
 - responsivnes on small screen(300 px for some reason...wtf why 300px??)
-- add section, article, header, footer tags somewhere
 - a lot of free space from sides of page(not neccessary i think, only if you would want to)
 
 Adding product and editing product:

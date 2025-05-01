@@ -1,4 +1,4 @@
-<!-- all-products.html -->
+{{-- components/all-products.blade.php --}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,24 +20,33 @@
     <!-- Header -->
     @include('components.header')
 
-    <!-- Main Content -->
+    <!-- Main -->
     <main class="container flex-fill mt-5 pt-4 pb-5">
 
         <hr>
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-2">
-            <!-- Breadcrumb -->
+            
+            <!-- Nav -->
             <nav aria-label="breadcrumb" class="mt-0 col-12 col-md-auto">
+
+                <!-- Breadcrumbs -->
                 <ol class="breadcrumb">
+
+                    <!-- Home -->
                     <li class="breadcrumb-item">
-                    <a href="{{ route('home') }}" class="text-decoration-none text-dark">
-                        <i class="bi bi-house-door-fill"></i> Home
-                    </a>
+                        <a href="{{ route('home') }}" class="text-decoration-none text-dark">
+                            <i class="bi bi-house-door-fill"></i> Home
+                        </a>
                     </li>
+
+                    <!-- All Books -->
                     <li class="breadcrumb-item active text-muted" aria-current="page">
                         All Books
                     </li>
+
                 </ol>
+                
             </nav>
 
             <!-- Ordering -->
@@ -50,14 +59,17 @@
                 <option value="newest" {{ request('sortOption') == 'newest' ? 'selected' : '' }}>Newest</option>
                 </select>
             </div>
+
         </div>
 
-
         <div class="row">
-            <!-- Filters -->
-
+        
+            <!-- Aside -->
             <aside class="col-md-3 pe-5">
+
+                <!-- Filters -->
                 <h3 class="fw-bold">Filters</h3>
+                
                 <form method="GET" action="{{ route('allProducts') }}">
                 @if(request('searched_value'))
                     <input type="hidden" name="searched_value" value="{{ request('searched_value') }}">
@@ -108,7 +120,6 @@
                     </div>
 
                     <!-- Language -->
-                    
                     <div class="mb-3">
                         <div class="d-flex align-items-center">
                             <h5 class="fw-bold mb-0">Language</h5>
@@ -144,13 +155,20 @@
                         </div>
                     </div>
                     
+                    <!-- Action Buttons -->
                     <div class="d-grid gap-2">
+
+                        <!-- Apply Filters -->
                         <button type="submit" class="btn btn-primary">Filter</button>
+
+                        <!-- Clear Filters -->
                         <a href="{{ route('allProducts') }}" class="btn btn-outline-primary">Clear</a>
+
                     </div>
+
             </aside>
 
-            <!-- Main second container -->
+            <!-- Section -->
             <section class="col-md-9 mb-5 d-flex flex-column">
 
                 <!-- All Products -->
@@ -185,6 +203,7 @@
                 <!-- Pagination -->
                 <div class="d-flex justify-content-center mt-auto pt-3">
                     <ul class="pagination mb-0">
+
                         <!-- First page link -->
                         <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
                             <a class="page-link text-start text-secondary" href="{{ $products->appends(request()->query())->url(1) }}">First</a>
@@ -208,9 +227,12 @@
                         <li class="page-item {{ $products->currentPage() == $products->lastPage() ? 'disabled' : '' }}">
                             <a class="page-link text-start text-secondary" href="{{ $products->appends(request()->query())->url($products->lastPage()) }}">Last</a>
                         </li>
+
                     </ul>
                 </div>
+
             </section>
+
         </div>
     </main>
 

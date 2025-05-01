@@ -1,3 +1,5 @@
+{{-- components/home.blade.php --}}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +13,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    
     @if (session('success'))
         @include('components.alert', ['message' => session('success')])
     @endif
@@ -32,10 +35,13 @@
     <!-- Main -->
     <main class="container flex-fill pt-4 pb-5 mb-5">
 
-        <!-- Bestsellers -->
-        <div class="pt-1">
+        <!-- Section -->
+        <section class="pt-1">
+
+            <!-- Bestsellers -->
             <h2 class="display-6 text-center mb-2 mt-5">Bestsellers</h2>
             <hr>
+
             <div class="d-flex mb-5">
                 <div style="overflow-x: auto; white-space: nowrap;">
                     <ul class="list-inline m-0 p-0">
@@ -45,12 +51,16 @@
                     </ul>
                 </div>
             </div>
-        </div>
+            
+        </section>
 
-        <!-- Newcomers -->
-        <div class="pt-1">
+        <!-- Section -->
+        <section class="pt-1">
+
+            <!-- Newcomers -->
             <h2 class="display-6 text-center mb-2 mt-5">Newcomers</h2>
             <hr>
+
             <div class="d-flex mb-5">
                 <div style="overflow-x: auto; white-space: nowrap;">
                     <ul class="list-inline m-0 p-0">
@@ -60,12 +70,16 @@
                     </ul>
                 </div>
             </div>
-        </div>
 
-        <!-- Trending -->
-        <div class="pt-1">
+        </section>
+
+        <!-- Section -->
+        <section class="pt-1">
+
+            <!-- Trending -->
             <h2 class="display-6 text-center mb-2 mt-5">Trending</h2>
             <hr>
+
             <div class="d-flex mb-5">
                 <div style="overflow-x: auto; white-space: nowrap;">
                     <ul class="list-inline m-0 p-0">
@@ -75,7 +89,8 @@
                     </ul>
                 </div>
             </div>
-        </div>
+
+        </section>
 
     </main>
 
