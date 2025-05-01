@@ -147,14 +147,6 @@
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">Filter</button>
                         <a href="{{ route('allProducts') }}" class="btn btn-outline-primary">Clear</a>
-                        @auth
-                            @if(Auth::user()->role === 'admin')
-                                    <a href="{{ route('show.add.product') }}" class="btn btn-outline-primary">
-                                        Add Product <i class="fas fa-edit ms-2"></i>
-                                    </a>
-                            @endif
-                        @endauth
-                        
                     </div>
             </aside>
 
@@ -163,14 +155,27 @@
 
                 <!-- All Products -->
                 <div id="products" class="flex-grow-1 mb-4">
-                    @if ($products->isEmpty())
+                    @if ($products->isEmpty() && !(Auth::check() && Auth::user()->role==='admin'))
                         <div class="text-center mt-5">
                             <img src="{{ asset('images/mascots/products.png') }}" alt="Empty Products Mascot" style="max-width: 350px; width: 100%;">
                             <p class="text-dark fw-bold fs-5 mb-5">Oops, no products match your filters!</p>
                         </div>
                     @else
-                        <div class="row row-cols-1 row-cols-md-2 g4">
-                            @foreach($products as $product)
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            @auth
+                                @if (Auth::user()->role === 'admin')
+                                    <div class="col">
+                                        <a href="{{ route('show.add.product') }}"
+                                           class="text-decoration-none text-secondary">
+                                            <div class="card add-product d-flex align-items-center justify-content-center shadow-sm">
+                                                <i class="bi bi-plus-lg fs-1"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
+                            @endauth
+
+                            @foreach ($products as $product)
                                 @include('components.horizontal-card', ['product' => $product])
                             @endforeach
                         </div>

@@ -5,8 +5,9 @@ namespace App\Services;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
-
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductService
 {
@@ -145,10 +146,12 @@ class ProductService
 
     }
 
-    public function updateProduct(Request $request, $id): Product
+    public function updateProduct(Request $r, int $id): Product
     {
         $product = Product::findOrFail($id);
-        $data = $request->validate([
+
+        // validation
+        $data = $r->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'description' => 'required|string',
@@ -158,16 +161,33 @@ class ProductService
             'in_stock' => 'required|integer|min:0',
         ]);
 
+        // removing 
+        foreach ($r->input('delete_existing', []) as $relPath) {
+            File::delete(public_path($relPath));
+            DB::table('product_image')
+              ->where('product_id', $id)
+              ->where('image', $relPath)
+              ->delete();
+        }
 
-        if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $customPath = public_path('images/books/' . $photo->getClientOriginalName());
-            
-                $photo->move(public_path('images/books'), $photo->getClientOriginalName());
+        // adding new
+        if ($r->hasFile('photos')) {
+            $files = $r->file('photos');
+            if (!is_array($files)) $files = [$files];
     
+            $dest = public_path('images/books');
+            if (!is_dir($dest)) mkdir($dest, 0755, true);
+    
+            foreach ($files as $photo) {
+                $name = uniqid() . '.' . $photo->getClientOriginalExtension();
+
+                $image = Image::make($photo->getRealPath());
+                $size = min($image->width(), $image->height());
+                $image->crop($size, $size)->resize(800, 800)->save($dest . '/' . $name, 90);
+
                 DB::table('product_image')->insert([
-                    'product_id' => $product->id,
-                    'image' => 'images/books/' . $photo->getClientOriginalName(),
+                    'product_id' => $id,
+                    'image' => 'images/books/' . $name,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -178,9 +198,10 @@ class ProductService
         return $product;
     }
 
-    public function addProduct($request): Product
+    public function addProduct(Request $r): Product
     {
-        $data = $request->validate([
+        // validation
+        $data = $r->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'description' => 'required|string',
@@ -190,34 +211,42 @@ class ProductService
             'in_stock' => 'required|integer|min:0',
         ]);
 
-        $product = Product::create([
-            'title' => $data['title'],
-            'author' => $data['author'],
-            'description' => $data['description'],
-            'genre' => $data['genre'],
-            'language' => $data['language'],
-            'price' => $data['price'],
-            'in_stock' => $data['in_stock'],
-        ]);
+        // create product
+        $product = Product::create($data);
 
-        if ($product){
-            if ($request->hasFile('photos')) {
-                foreach ($request->file('photos') as $photo) {
-                    $customPath = public_path('images/books/' . $photo->getClientOriginalName());
-                
-                    $photo->move(public_path('images/books'), $photo->getClientOriginalName());
-        
-                    DB::table('product_image')->insert([
-                        'product_id' => $product->id,
-                        'image' => 'images/books/' . $photo->getClientOriginalName(),
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
+        // save images
+        if ($r->hasFile('photos')) {
+
+            $files = $r->file('photos');
+            if (!is_array($files)) {
+                $files = [$files];
+            }
+
+            $dest = public_path('images/books');
+            if (!is_dir($dest)) {
+                mkdir($dest, 0755, true);
+            }
+
+            foreach ($files as $photo) {
+
+                $name = uniqid() . '.' . $photo->getClientOriginalExtension();
+
+                $image = Image::make($photo->getRealPath());
+                $size  = min($image->width(), $image->height());
+                $image->crop($size, $size)
+                      ->resize(800, 800)
+                      ->save($dest . '/' . $name, 90);
+
+                DB::table('product_image')->insert([
+                    'product_id' => $product->id,
+                    'image'      => 'images/books/' . $name,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
         }
 
-        return $product; 
+        return $product;
     }
 
     public function deleteProduct($id)

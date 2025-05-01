@@ -51,7 +51,7 @@ class ProductController extends Controller
         }
 
         $product = $productService->updateProduct($request, $id);
-        return redirect()->route('show.edit.product', ['id' => $product->id]);
+        return redirect()->route('show.product', ['id' => $product->id]);
     }
 
     public function addProduct(Request $request, ProductService $productService)
@@ -62,10 +62,8 @@ class ProductController extends Controller
         }
 
         $product = $productService->addProduct($request);
-        return redirect()->route('show.edit.product', ['id' => $product->id]);
+        return redirect()->route('show.product', ['id' => $product->id]);
     }
-
-    
 
     public function deleteProduct($id, ProductService $productService)
     {
