@@ -282,19 +282,3 @@ footer .container {
     border: 2px solid var(--secondary);
     cursor: pointer;
 }
-
-.add-product{
-    border: 2px solid var(--secondary);
-    width: 100%;
-    min-height: 255px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.add-product i{
-    color: var(--secondary);
-    font-size: 2rem;
-}

@@ -166,13 +166,15 @@
 
                     </div>
 
+                </form>
+
             </aside>
 
             <!-- Section -->
             <section class="col-md-9 mb-5 d-flex flex-column">
 
                 <!-- All Products -->
-                <div id="products" class="flex-grow-1 mb-4">
+                <div id="products" class="flex-grow-1 mb-4 mt-4 mt-md-0">
                     @if ($products->isEmpty() && !(Auth::check() && Auth::user()->role==='admin'))
                         <div class="text-center mt-5">
                             <img src="{{ asset('images/mascots/products.png') }}" alt="Empty Products Mascot" style="max-width: 350px; width: 100%;">
@@ -182,10 +184,11 @@
                         <div class="row row-cols-1 row-cols-md-2 g-4">
                             @auth
                                 @if (Auth::user()->role === 'admin')
-                                    <div class="col">
-                                        <a href="{{ route('show.add.product') }}"
-                                           class="text-decoration-none text-secondary">
-                                            <div class="card add-product d-flex align-items-center justify-content-center shadow-sm">
+
+                                    <!-- Add Product Button -->
+                                    <div class="col mb-3">
+                                        <a href="{{ route('show.add.product') }}" class="text-decoration-none text-secondary">
+                                            <div class="card border border-secondary border-2 shadow-sm d-flex flex-row align-items-center justify-content-center p-3 h-100" style="min-height:255px;"> 
                                                 <i class="bi bi-plus-lg fs-1"></i>
                                             </div>
                                         </a>
@@ -193,6 +196,7 @@
                                 @endif
                             @endauth
 
+                            <!-- Products -->
                             @foreach ($products as $product)
                                 @include('components.horizontal-card', ['product' => $product])
                             @endforeach
