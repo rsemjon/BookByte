@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Validator;
 
 class ProductService
 {
@@ -150,8 +151,8 @@ class ProductService
     {
         $product = Product::findOrFail($id);
 
-        // validation
-        $data = $r->validate([
+        // valiadtion
+        $validator = Validator::make($r->all(), [
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'description' => 'required|string',
@@ -160,6 +161,18 @@ class ProductService
             'price' => 'required|numeric|min:0|max:99999999.99', // match decimal(10,2)
             'in_stock' => 'required|integer|min:0',
         ]);
+
+        $current  = DB::table('product_image')->where('product_id', $id)->count();
+        $toDelete = count($r->input('delete_existing', []));
+        $toAdd    = $r->hasFile('photos') ? count($r->file('photos')) : 0;
+
+        $validator->after(function ($v) use ($current, $toDelete, $toAdd) {
+            if ($current - $toDelete + $toAdd < 2) {
+                $v->errors()->add('photos', 'The product must have at least 2 images.');
+            }
+        });
+
+        $data = $validator->validate(); 
 
         // removing 
         foreach ($r->input('delete_existing', []) as $relPath) {
@@ -201,7 +214,7 @@ class ProductService
     public function addProduct(Request $r): Product
     {
         // validation
-        $data = $r->validate([
+        $validator = Validator::make($r->all(), [
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'description' => 'required|string',
@@ -210,6 +223,14 @@ class ProductService
             'price' => 'required|numeric|min:0|max:99999999.99', // match decimal(10,2)
             'in_stock' => 'required|integer|min:0',
         ]);
+
+        $validator->after(function ($v) use ($r) {
+            if (!$r->hasFile('photos') || count($r->file('photos')) < 2) {
+                $v->errors()->add('photos', 'The product must have at least 2 images.');
+            }
+        });
+
+        $data = $validator->validate();
 
         // create product
         $product = Product::create($data);

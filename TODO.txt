@@ -5,7 +5,6 @@ From Krajcovic:
 - a lot of free space from sides of page(not neccessary i think, only if you would want to)
 
 Adding product and editing product:
-- Add functionality to enforce that user needs to add AT LEAST two photos when creating new product(it is one of the condition on GH).
 - For cart functionalities, make sure that fields for order cannot be filled with inproper values(like phone number having letters etc.)
 
 Also, please test admin functionality, if it works, if any problem let me know and i will fix it!
