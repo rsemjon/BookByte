@@ -28,12 +28,12 @@
         <button class="btn btn-sm fw-bold d-flex justify-content-center align-items-center" style="width: 34px; height: 34px;" onclick="changeQty({{ $p->id }}, -1)">−</button>
 
         <!-- Quantity -->
-        <span id="qty-{{ $p->id }}" class="px-2 text-center d-inline-block" style="min-width: 40px;">
+        <span id="qty-{{ $p->id }}" data-max-qty="{{ $p->in_stock }}" class="px-2 text-center d-inline-block" style="min-width: 40px;">
             {{ $p->qty }}
         </span>
 
         <!-- Plus Button -->
-        <button class="btn btn-sm fw-bold d-flex justify-content-center align-items-center" style="width: 34px; height: 34px;" onclick="changeQty({{ $p->id }}, 1)">+</button>
+        <button id="plus-{{ $p->id }}" class="btn btn-sm fw-bold d-flex justify-content-center align-items-center" style="width:34px; height:34px;" onclick="changeQty({{ $p->id }}, 1)">+</button>
 
     </div>
 

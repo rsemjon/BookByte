@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     updateRowBorders();
+    recalcTotal();
 });
 
 
@@ -22,34 +23,36 @@ function recalcTotal() {
 
     document.querySelectorAll('.price').forEach(p => {
         const price = parseFloat(p.dataset.price);
-        const id = p.closest('div[id^=row-]').id.split('-')[1];
+        const id = p.closest('article[id^=row-]').id.split('-')[1];
         const qty = parseInt(document.getElementById('qty-' + id).textContent);
         total += price * qty;
     });
 
-    document.getElementById('total-price').textContent = total.toFixed(2) + '€';
+    const totalEl = document.getElementById('total-price');
+    if (totalEl) totalEl.textContent = total.toFixed(2) + '€';
 }
 
 function changeQty(id, delta) {
-    const qtyEl = document.getElementById('qty-' + id);
-    const currentQty = parseInt(qtyEl.textContent, 10);
-    const newQty     = currentQty + delta;
 
-    if (newQty < 1) {
+    const qtyEl = document.getElementById('qty-' + id);
+    const maxQty = parseInt(qtyEl.dataset.maxQty, 10);
+    const curr = parseInt(qtyEl.textContent, 10);
+    const next = curr + delta;
+
+    if (next < 1) {
         removeItem(id);
         return;
     }
 
-    post(window.cartUpdateUrl.replace(':id', id), { qty: newQty })
+    if (next > maxQty) 
+        return;
+
+    post(window.cartUpdateUrl.replace(':id', id), { qty: next })
         .then(() => {
-            qtyEl.textContent = newQty;
+            qtyEl.textContent = next;
 
             const minusBtn = qtyEl.parentElement.querySelector('button:first-child');
-            const plusBtn  = qtyEl.parentElement.querySelector('button:last-child');
-            const maxQty   = parseInt(qtyEl.dataset.maxQty || 999, 10);
-
-            minusBtn.disabled = false; 
-            plusBtn.disabled  = newQty >= maxQty;
+            minusBtn.disabled = next <= 1;
 
             recalcTotal();
         });
@@ -78,7 +81,6 @@ function updateRowBorders() {
     const rows = Array.from(document.querySelectorAll('[id^="row-"]'));
     rows.forEach(r => r.classList.add('border-bottom'));
 
-    if (rows.length > 0) {
-        rows[rows.length - 1].classList.remove('border-bottom');
-    }
+    if (rows.length > 0)
+        rows.at(-1).classList.remove('border-bottom');
 }

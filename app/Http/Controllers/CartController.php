@@ -44,38 +44,46 @@ class CartController extends Controller
 
     public function add(Request $request, Product $product)
     {
-        $order = $this->getOrder();
+        $order = $this->getOrder() ?? Order::create([
+            'user_id' => Auth::id(),
+            'order_status' => 'IN_PROGRESS',
+            'first_name' => Auth::user()->name ?? '',
+            'last_name' => '',
+            'phone_number' => '',
+            'email_address' => Auth::user()->email ?? '',
+            'address' => '',
+            'city' => '',
+            'postal_code' => '',
+        ]);
 
-        if (!$order) {
-            $order = Order::create([
-                'user_id' => Auth::id(),
-                'order_status' => 'IN_PROGRESS',
-                'first_name' => Auth::user()->name ?? '',
-                'last_name' => '',
-                'phone_number' => '',
-                'email_address' => Auth::user()->email ?? '',
-                'address' => '',
-                'city' => '',
-                'postal_code' => '',
-            ]);
-        }
-
-        $qty = max(1, (int)$request->input('qty', 1));
+        $addQty = max(1, (int) $request->input('qty', 1));
 
         $existing = DB::table('orders_products')
             ->where('order_id', $order->id)
             ->where('product_id', $product->id)
             ->first();
 
+        $currentQty = $existing->quantity ?? 0;
+        $allowed    = max(0, $product->in_stock - $currentQty);
+
+        if ($allowed === 0) {
+            return $request->ajax()
+                ? response()->json(['error' => 'Not enough stock'], 422)
+                : back()->withErrors('Not enough stock');
+        }
+
+        $finalAdd = min($addQty, $allowed);
+        $newQty   = $currentQty + $finalAdd;
+
         if ($existing) {
             DB::table('orders_products')
                 ->where('id', $existing->id)
-                ->update(['quantity' => $existing->quantity + $qty]);
+                ->update(['quantity' => $newQty, 'updated_at' => now()]);
         } else {
             DB::table('orders_products')->insert([
                 'order_id' => $order->id,
                 'product_id' => $product->id,
-                'quantity' => $qty,
+                'quantity' => $finalAdd,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -85,9 +93,9 @@ class CartController extends Controller
             ->where('order_id', $order->id)
             ->sum('quantity');
 
-            return $request->ajax()
+        return $request->ajax()
             ? response()->json(['ok' => true, 'totalQty' => $totalQty])
-            : redirect()->back()->with('success', 'Super, added to your cart!');
+            : back()->with('success', 'Added to cart');
     }
 
     public function update(Request $request, Product $product)
@@ -98,12 +106,13 @@ class CartController extends Controller
             return response()->json(['error' => 'Order not found'], 404);
         }
 
-        $qty = max(1, (int)$request->input('qty', 1));
+        $reqQty = max(1, (int) $request->input('qty', 1));
+        $newQty = min($reqQty, $product->in_stock);
 
         DB::table('orders_products')
             ->where('order_id', $order->id)
             ->where('product_id', $product->id)
-            ->update(['quantity' => $qty, 'updated_at' => now()]);
+            ->update(['quantity' => $newQty, 'updated_at' => now()]);
 
         return response()->json(['ok' => true]);
     }

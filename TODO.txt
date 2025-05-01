@@ -1,13 +1,4 @@
-For ANTON:
-
-From Krajcovic:
-- responsivnes on small screen(300 px for some reason...wtf why 300px??)
-- a lot of free space from sides of page(not neccessary i think, only if you would want to)
-
-Adding product and editing product:
-- For cart functionalities, make sure that fields for order cannot be filled with inproper values(like phone number having letters etc.)
-
-Also, please test admin functionality, if it works, if any problem let me know and i will fix it!
-
-If there is anything you would like to change, go for it.
-Also we will go over the docs, but that shouldnt be a problem.
+- check all views and fix responsivnes on small screen
+- check how to better use free space from sides of page
+- check all fields validation
+- documentation
