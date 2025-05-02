@@ -47,27 +47,52 @@
                 </div>
 
                 <!-- Fields -->
-                <form>
+                <form action="{{ route('profile.update') }}" method="POST">
+
+                    @csrf @method('PUT')
                     
                     <!-- Top Row -->
                     <div class="row mt-4">
 
                         <!-- First Name -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 position-relative ">
                             <label for="name" class="form-label">First Name</label>
-                            <input type="text" class="form-control border border-2 border-dark" id="name" placeholder="{{ Auth::user()->name }}" required>
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                class="form-control border border-2 border-dark @error('name') is-invalid @enderror"
+                                value="{{ old('name', Auth::user()->name) }}"
+                                required
+                            >
+                            @error('name') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                         </div>
 
-                        <!-- Second Name -->
-                        <div class="col-md-4">
-                            <label for="second_name" class="form-label">Second Name</label>
-                            <input type="text" class="form-control border border-2 border-dark" id="second_name" placeholder="{{ Auth::user()->last_name }}" required>
+                        <!-- Last Name -->
+                        <div class="col-md-4 position-relative">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input
+                                id="last_name"
+                                name="last_name"
+                                type="text"
+                                class="form-control border border-2 border-dark @error('last_name') is-invalid @enderror"
+                                value="{{ old('last_name', Auth::user()->last_name) }}"
+                                placeholder="e.g., Doe"
+                            >
+                            @error('last_name') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                         </div>
 
                         <!-- Date of Birth -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 position-relative">
                             <label for="birth_date" class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control border border-2 border-dark" id="birth_date" placeholder="{{ Auth::user()->birth_date }}" required>
+                            <input
+                                id="birth_date"
+                                name="birth_date"
+                                type="date"
+                                class="form-control border border-2 border-dark @error('birth_date') is-invalid @enderror"
+                                value="{{ old('birth_date', Auth::user()->birth_date?->format('Y-m-d')) }}"
+                            >
+                            @error('birth_date') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                         </div>
 
                     </div>
@@ -76,16 +101,35 @@
                     <div class="row mt-4">
 
                         <!-- Email -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 position-relative">   {{-- 1. --}}
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control border border-2 border-dark" id="email" placeholder="{{ Auth::user()->email }}" required>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                class="form-control border border-2 border-dark @error('email') is-invalid @enderror"
+                                value="{{ old('email', Auth::user()->email) }}"
+                                required
+                            >
+                            @error('email') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                         </div>
 
                         <!-- Phone Number -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 position-relative">
                             <label for="phone_number" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control border border-2 border-dark" id="phone_number" placeholder="{{ Auth::user()->phone_number }}" required>
+                            <input
+                                id="phone_number"
+                                name="phone_number"
+                                type="tel"
+                                class="form-control border border-2 border-dark @error('phone_number') is-invalid @enderror"
+                                value="{{ old('phone_number', Auth::user()->phone_number) }}"
+                                placeholder="e.g., +421 912 345 678"
+                            >
+                            @error('phone_number')
+                                <div class="invalid-tooltip d-block">{{ $message }}</div>
+                            @enderror
                         </div>
+
 
                         <!-- Save Button -->
                         <div class="col-md-4 col-12 d-flex align-items-end mt-3 mt-md-0">
@@ -112,19 +156,37 @@
 
                 <h3 class="fw-bold">Password</h3>
 
-                <form>
+                <form action="{{ route('profile.password') }}" method="POST" class="mt-5">
+
+                    @csrf @method('PUT')
+
                     <div class="row mt-4">
 
                         <!-- New Password -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 position-relative">
                             <label for="password" class="form-label">New Password</label>
-                            <input type="password" class="form-control border border-2 border-dark" id="password" placeholder="Enter your new password" required>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                class="form-control border border-2 border-dark @error('password') is-invalid @enderror"
+                                placeholder="At least 6 characters"
+                                required
+                            >
+                            @error('password') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                         </div>
 
                         <!-- Confirm Password -->
-                        <div class="col-md-4">
-                            <label for="confirm_password" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control border border-2 border-dark" id="confirm_password" placeholder="Confirm your password" required>
+                        <div class="col-md-4 position-relative">
+                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                            <input
+                                id="password_confirmation"
+                                name="password_confirmation"
+                                type="password"
+                                class="form-control border border-2 border-dark"
+                                placeholder="Repeat password"
+                                required
+                            >
                         </div>
                         
                         <!-- Update Button -->

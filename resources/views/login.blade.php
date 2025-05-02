@@ -33,28 +33,45 @@
                     @csrf
 
                     <!-- Email -->
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control border border-2 border-dark" id="email" placeholder="Enter your email" required>
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            class="form-control border border-2 border-dark @error('email') is-invalid @enderror"
+                            placeholder="e.g., john@example.com"
+                            value="{{ old('email') }}"
+                            required
+                        >
+                        @error('email')
+                            <div class="invalid-tooltip d-block">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Password -->
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control border border-2 border-dark" id="password" placeholder="Enter your password" required>
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            class="form-control border border-2 border-dark @error('password') is-invalid @enderror"
+                            placeholder="Your password"
+                            required
+                        >
+                        @error('password')
+                            <div class="invalid-tooltip d-block">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    <!-- Auth Error -->
+                    @error('credentials')
+                        <div class="text-danger mb-2">{{ $message }}</div>
+                    @enderror
 
                     <!-- Login Button -->
                     <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Log In</button>
-
-                    @if($errors->any())
-                        <ul>
-                            @foreach($errors->all() as $e)
-                            <li>{{$e }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
-
                 </form>
             </div>
         </section>

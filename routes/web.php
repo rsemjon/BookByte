@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DeliveryController;
@@ -21,9 +22,11 @@ Route::post('register', [RegisterController::class, 'registerUser'])->name('regi
 Route::post('logout', [LoginController::class, 'logoutUser'])->name('logout');
 
 // profile
-Route::get('/profile', function () {
-    return view('profile'); 
-})->middleware('auth')->name('profile');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'displayProfile'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+});
 
 // products
 Route::get('products', [ProductController::class, 'showAllProducts'])->name('allProducts');
@@ -42,8 +45,8 @@ Route::post('/cart/update/{product}', [CartController::class,'update'])->name('c
 Route::post('/cart/remove/{product}', [CartController::class,'remove'])->name('cart.remove');
 
 // delivery
-Route::get ('/delivery',  [DeliveryController::class,'show'])->name('delivery');
-Route::post('/delivery',  [DeliveryController::class,'store'])->name('delivery.store');
+Route::get ('/delivery', [DeliveryController::class,'show'])->name('delivery');
+Route::post('/delivery', [DeliveryController::class,'store'])->name('delivery.store');
 
 // payment
 Route::get('/checkout/payment', [PaymentController::class, 'show'])->name('payment');

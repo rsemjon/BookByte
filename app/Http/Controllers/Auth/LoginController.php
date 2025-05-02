@@ -16,21 +16,27 @@ class LoginController extends Controller
 
     public function loginUser(Request $req)
     {
-        $validated = $req->validate([
-            'email' => 'required|email',
-            'password' => 'required|String'
-        ]);
+        $validated = $req->validate(
+            [
+                'email' => 'bail|required|email:rfc,dns',
+                'password' => 'bail|required|string',
+            ],
+            [],
+            [
+                'email' => 'email address',
+                'password' => 'password',
+            ]
+        );
 
         if(!Auth::attempt($validated)){
             throw ValidationException::withMessages([
-                'credentials' => 'Incorrect credentials'
+                'credentials' => 'Incorrect email or password.'
             ]);
             
         }
-        else{
-            $req->session()->regenerate();
-            return redirect()->route('profile');
-        }
+        
+        $req->session()->regenerate();
+        return redirect()->route('profile');
     }
 
     public function logoutUser(Request $req)
@@ -41,6 +47,5 @@ class LoginController extends Controller
         $req->session()->regenerateToken();
 
         return redirect()->route('display.login');
-
-    }
+    }   
 }

@@ -28,44 +28,76 @@
         <!-- Section -->
         <section class="container d-flex justify-content-center">
             <div class="w-50">
-                <form action="{{ route ('register') }}" method="POST">
-
+                <form action="{{ route('register') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
 
                     <!-- First Name -->
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="name" class="form-label">First Name</label>
-                        <input type="text" name="name" class="form-control border border-2 border-dark" id="firstName" placeholder="Enter your first name" required>
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            class="form-control border border-2 border-dark @error('name') is-invalid @enderror"
+                            placeholder="e.g., John"
+                            value="{{ old('name') }}"
+                            required
+                        >
+                        @error('name')
+                            <div class="invalid-tooltip d-block">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Email -->
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control border border-2 border-dark" id="email" placeholder="Enter your email" required>
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            class="form-control border border-2 border-dark @error('email') is-invalid @enderror"
+                            placeholder="e.g., john@example.com"
+                            value="{{ old('email') }}"
+                            required
+                        >
+                        @error('email')
+                            <div class="invalid-tooltip d-block">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Password -->
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control border border-2 border-dark" id="password" placeholder="Enter your password" required>
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            class="form-control border border-2 border-dark @error('password') is-invalid @enderror"
+                            placeholder="At least 6 characters"
+                            autocomplete="new-password"
+                            required
+                        >
+                        @error('password')
+                            <div class="invalid-tooltip d-block">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Confirm Password -->
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control border border-2 border-dark" id="confirmPassword" placeholder="Confirm your password" required>
+                        <input
+                            id="password_confirmation"
+                            type="password"
+                            name="password_confirmation"
+                            class="form-control border border-2 border-dark"
+                            placeholder="Repeat password"
+                            autocomplete="new-password"
+                            required
+                        >
                     </div>
 
                     <!-- Register Button -->
                     <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Register</button>
-
-                    @if($errors->any())
-                        <ul>
-                            @foreach($errors->all() as $e)
-                            <li>{{$e }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
 
                 </form>
             </div>
