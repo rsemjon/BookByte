@@ -11,11 +11,17 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     private function getOrder(): ?Order
-    {
-        return Order::where('user_id', Auth::id())
-            ->where('order_status', 'IN_PROGRESS')
-            ->first();
+{
+    $query = Order::where('order_status', 'IN_PROGRESS');
+
+    if (Auth::id()) {
+        $query->where('user_id', Auth::id());
+    } else {
+        $query->where('session_id', session()->getId());
     }
+
+    return $query->first();
+}
 
     public function index()
     {
@@ -56,6 +62,8 @@ class CartController extends Controller
             'address' => '',
             'city' => '',
             'postal_code' => '',
+            'session_id' => session()->getId(),
+
         ]);
 
         $addQty = max(1, (int) $request->input('qty', 1));

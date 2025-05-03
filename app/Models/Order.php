@@ -23,6 +23,7 @@ class Order extends Model
         'postal_code',
         'state',
         'payment_method',
+        'session_id',
     ];
 
     public function orders()
