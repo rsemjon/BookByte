@@ -103,7 +103,7 @@
                     <h5 class="text-primary" id="bookAuthor">{{ $product->author }}</h5>
 
                     <!-- Tags -->
-                    <div class="d-flex flex-wrap mt-2">
+                    <div class="d-flex flex-wrap gap-2 mt-2">
 
                         <!-- Genre -->
                         <span class="badge bg-info me-2 fs-6 p-2" id="bookGenre">{{ $product->genre }}</span>

@@ -63,32 +63,32 @@
                         @error('password')
                             <div class="invalid-tooltip d-block">{{ $message }}</div>
                         @enderror
+
+                        <!-- Auth Error -->
+                        @error('credentials')
+                            <div class="invalid-tooltip d-block">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    <!-- Auth Error -->
-                    @error('credentials')
-                        <div class="text-danger mb-2">{{ $message }}</div>
-                    @enderror
-
                     <!-- Login Button -->
-                    <button type="submit" class="btn btn-primary w-100 mb-3 mt-4">Log In</button>
+                    <button type="submit" class="btn btn-primary w-100 mt-5">Log In</button>
                 </form>
             </div>
         </section>
 
         <!-- Social Login -->
-        <h5 class="text-center mt-3">Or continue with</h5>
+        <h5 class="text-center mt-5">Or continue with</h5>
+        
+        <div class="container d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
 
-        <div class="container d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 pt-4">
-            
             <!-- Google -->
-            <a href="#" class="btn btn-dark w-auto d-flex align-items-center justify-content-center px-4 py-2">
+            <a href="#" class="btn btn-dark d-flex align-items-center justify-content-center px-4 py-2" style="width: 140px;">
                 <span class="me-2">Google</span>
                 <i class="bi bi-google"></i>
             </a>
 
             <!-- Apple -->
-            <a href="#" class="btn btn-dark w-auto d-flex align-items-center justify-content-center px-4 py-2">
+            <a href="#" class="btn btn-dark d-flex align-items-center justify-content-center px-4 py-2" style="width: 140px;">
                 <span class="me-2">Apple</span>
                 <i class="bi bi-apple"></i>
             </a>

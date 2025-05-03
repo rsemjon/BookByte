@@ -1,3 +1,2 @@
-- check all views and fix responsivnes on small screen
 - check how to better use free space from sides of page
 - documentation
