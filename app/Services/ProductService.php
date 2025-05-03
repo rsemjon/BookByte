@@ -153,13 +153,13 @@ class ProductService
 
         // valiadtion
         $validator = Validator::make($r->all(), [
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'description' => 'required|string',
-            'genre' => 'required|string|max:255',
-            'language' => 'required|in:Slovak,Russian,English,German', // must be one of these
-            'price' => 'required|numeric|min:0|max:99999999.99', // match decimal(10,2)
-            'in_stock' => 'required|integer|min:0',
+            'title' => 'bail|required|string|max:255',
+            'author' => 'bail|required|string|max:255',
+            'description' => 'bail|required|string',
+            'genre' => 'bail|required|string|max:255',
+            'language' => 'bail|required|string|max:255',
+            'price' => 'bail|required|numeric|min:0|max:99999999.99',
+            'in_stock' => 'bail|required|integer|min:0',
         ]);
 
         $current  = DB::table('product_image')->where('product_id', $id)->count();
@@ -215,20 +215,20 @@ class ProductService
     {
         // validation
         $validator = Validator::make($r->all(), [
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'description' => 'required|string',
-            'genre' => 'required|string|max:255',
-            'language' => 'required|in:Slovak,Russian,English,German', // must be one of these
-            'price' => 'required|numeric|min:0|max:99999999.99', // match decimal(10,2)
-            'in_stock' => 'required|integer|min:0',
+            'title' => 'bail|required|string|max:255',
+            'author' => 'bail|required|string|max:255',
+            'description' => 'bail|required|string',
+            'genre' => 'bail|required|string|max:255',
+            'language' => 'bail|required|string|max:255',
+            'price' => 'bail|required|numeric|min:0|max:99999999.99',
+            'in_stock' => 'bail|required|integer|min:0',
         ]);
 
-        $validator->after(function ($v) use ($r) {
-            if (!$r->hasFile('photos') || count($r->file('photos')) < 2) {
-                $v->errors()->add('photos', 'The product must have at least 2 images.');
-            }
+        $validator->after(function($v) use($r){
+            $cnt = $r->hasFile('photos') ? count($r->file('photos')) : 0;
+            if ($cnt < 2) $v->errors()->add('photos','The product must have at least 2 images.');
         });
+        
 
         $data = $validator->validate();
 
@@ -276,14 +276,10 @@ class ProductService
         ->where('product_id', $id)
         ->pluck('image');
 
-
-
         foreach ($images as $imagePath) {
             $fullPath = public_path($imagePath);
-
-            
             if (file_exists($fullPath)) {
-                unlink($imagePath);
+                unlink($fullPath);
             }
         }
 

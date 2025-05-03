@@ -63,6 +63,7 @@
                                 type="text"
                                 class="form-control border border-2 border-dark @error('name') is-invalid @enderror"
                                 value="{{ old('name', Auth::user()->name) }}"
+                                placeholder="e.g., John"
                                 required
                             >
                             @error('name') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
@@ -101,7 +102,7 @@
                     <div class="row mt-4">
 
                         <!-- Email -->
-                        <div class="col-md-4 position-relative">   {{-- 1. --}}
+                        <div class="col-md-4 position-relative">
                             <label for="email" class="form-label">Email</label>
                             <input
                                 id="email"
@@ -109,6 +110,7 @@
                                 type="email"
                                 class="form-control border border-2 border-dark @error('email') is-invalid @enderror"
                                 value="{{ old('email', Auth::user()->email) }}"
+                                placeholder="e.g., john@example.com"
                                 required
                             >
                             @error('email') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
