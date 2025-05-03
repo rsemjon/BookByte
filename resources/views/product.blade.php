@@ -122,7 +122,7 @@
 
                         <!-- Price -->
                         <li class="list-inline-item">
-                            <h3 class="text-secondary fw-bold mb-0" id="bookPrice">{{ $product->price }}</h3>
+                            <h3 class="text-secondary fw-bold mb-0" id="bookPrice">{{ $product->price }} €</h3>
                         </li>
 
                         <!-- In Stocks -->

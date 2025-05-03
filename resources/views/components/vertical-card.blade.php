@@ -22,7 +22,7 @@
                 <p class="text-start text-dark text-truncate mb-1">{{ $product->author }}</p>
 
                 <!-- Price -->
-                <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ number_format($product->price, 2) }}€</p>
+                <p class="text-start text-secondary text-truncate fw-bold mb-0">{{ number_format($product->price, 2) }} €</p>
             </div>
             
         </div>

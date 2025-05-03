@@ -75,7 +75,7 @@
                     </div>
 
                     <!-- Price -->
-                    <span class="text-secondary fw-bold fs-6">1.50€</span>
+                    <span class="text-secondary fw-bold fs-6">1.50 €</span>
                 </label>
 
                 <!-- Online -->

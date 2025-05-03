@@ -62,7 +62,7 @@
 
                 <!-- Cost -->
                 <span id="total-price" class="text-secondary fw-bold fs-4">
-                    {{ number_format($total ?? 0, 2) }}€
+                    {{ number_format($total ?? 0, 2) }} €
                 </span>
 
             </div>

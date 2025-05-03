@@ -17,7 +17,7 @@
 
     <!-- Price -->
     <span class="text-secondary fw-bold flex-shrink-0">
-        {{ number_format($product->price, 2) }}€
+        {{ number_format($product->price, 2) }} €
     </span>
 
     <!-- Quantity -->

@@ -150,19 +150,15 @@
                 <!-- Language -->
                 <div class="mb-3 position-relative">
                     <label for="productLanguage" class="form-label">Language</label>
-                    <select
-                        id="productLanguage"
-                        name="language"
-                        required
-                        class="form-select border border-2 border-dark @error('language') is-invalid @enderror">
-                        <option value="" disabled {{ old('language') ? '' : 'selected' }}>Select a language</option>
-                        <option value="English" {{ old('language') == 'English' ? 'selected' : '' }}>English</option>
-                        <option value="English" {{ old('language') == 'Russion' ? 'selected' : '' }}>Russian</option>
-                        <option value="English" {{ old('language') == 'Slovak' ? 'selected' : '' }}>Slovak</option>
-                    </select>
-                    @error('language') 
-                        <div class="invalid-tooltip d-block">{{ $message }}</div> 
-                    @enderror
+                    <input
+                            id="productLanguage"
+                            name="language"
+                            type="text"
+                            required
+                            placeholder="e.g., English"
+                            value="{{ old('language') }}"
+                            class="form-control border border-2 border-dark @error('language') is-invalid @enderror">
+                    @error('language') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                 </div>
                 
                 <!-- In Stock -->

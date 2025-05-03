@@ -76,7 +76,7 @@
                     <div class="d-flex justify-content-between">
                         <p class="text-muted fw-bold text-truncate">{{ $deliveryLabel }}</p>
                         <p class="{{ $deliveryCost==0 ? 'text-muted' : 'text-secondary' }} fw-bold">
-                            {{ $deliveryCost==0 ? 'No Charge' : number_format($deliveryCost,2).'€' }}
+                            {{ $deliveryCost==0 ? 'No Charge' : number_format($deliveryCost,2).' €' }}
                         </p>
                     </div>
 
@@ -91,7 +91,7 @@
                     <div class="d-flex justify-content-between">
                         <p class="text-muted fw-bold text-truncate" style="max-width:60%">{{ $paymentLabel }}</p>
                         <p class="{{ $paymentCost==0 ? 'text-muted' : 'text-secondary' }} fw-bold">
-                            {{ $paymentCost==0 ? 'No Charge' : number_format($paymentCost,2).'€' }}
+                            {{ $paymentCost==0 ? 'No Charge' : number_format($paymentCost,2).' €' }}
                         </p>
                     </div>
 
@@ -110,7 +110,7 @@
 
             <!-- Cost -->
             <span class="text-secondary fw-bold fs-4">
-                {{ number_format($finalTotal, 2) }}€
+                {{ number_format($finalTotal, 2) }} €
             </span>
 
         </div>

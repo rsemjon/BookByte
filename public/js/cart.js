@@ -29,7 +29,7 @@ function recalcTotal() {
     });
 
     const totalEl = document.getElementById('total-price');
-    if (totalEl) totalEl.textContent = total.toFixed(2) + '€';
+    if (totalEl) totalEl.textContent = total.toFixed(2) + ' €';
 }
 
 function changeQty(id, delta) {

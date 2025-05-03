@@ -105,7 +105,7 @@ class CartController extends Controller
 
         return $request->ajax()
             ? response()->json(['ok' => true, 'totalQty' => $totalQty])
-            : back()->with('success', 'Added to cart');
+            : back()->with('success', 'Super, added to your cart!');
     }
 
     public function update(Request $request, Product $product)

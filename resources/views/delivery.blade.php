@@ -56,7 +56,7 @@
                             <input type="radio" name="deliveryMethod" class="form-check-input me-3" value="HOME" {{ old('deliveryMethod', $order->delivery_method ?? '') === 'HOME' ? 'checked' : '' }}>
                             Home Delivery (FedEx)
                         </div>
-                        <span class="text-secondary fw-bold fs-6">3.50€</span>
+                        <span class="text-secondary fw-bold fs-6">3.50 €</span>
                     </label>
     
                     <!-- Collapsible Section -->
@@ -156,7 +156,7 @@
                             <input type="radio" name="deliveryMethod" class="form-check-input me-3" value="DROP_BOX" {{ old('deliveryMethod', $order->delivery_method ?? '') === 'DROP_BOX' ? 'checked' : '' }}>
                             Drop Box (Alza)
                         </div>
-                        <span class="text-secondary fw-bold fs-6">1.80€</span>
+                        <span class="text-secondary fw-bold fs-6">1.80 €</span>
                     </label>
 
                     <!-- Collapsible Section -->

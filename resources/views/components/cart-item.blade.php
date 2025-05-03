@@ -21,7 +21,7 @@
             <div class="text-muted">
                 In Stock {{ $p->in_stock > 10 ? '> 10' : $p->in_stock }} pcs
             </div>
-            
+
         </div>
 
         <!-- Change Quantity -->
@@ -51,7 +51,7 @@
         <!-- Price -->
         <div class="mt-2 mt-md-0 ms-md-3 flex-shrink-0 text-center text-md-end" style="min-width: 65px;">
             <span class="text-secondary fw-bold price" data-price="{{ $p->price }}">
-                {{ number_format($p->price, 2) }}€
+                {{ number_format($p->price, 2) }} €
             </span>
         </div>
 
