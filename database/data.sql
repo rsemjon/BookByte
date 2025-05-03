@@ -8,7 +8,7 @@ TRUNCATE TABLE public.products RESTART IDENTITY CASCADE;
 INSERT INTO public.products (id, title, author, description, genre, language, price, in_stock, total_purchased, created_at, updated_at)
 VALUES
 (1, 'Do Androids Dream of Electric Sheep?', 'Philip K. Dick',
- 'A post-apocalyptic novel set in a future where Earth has been ravaged by nuclear war. The story follows bounty hunter Rick Deckard, who is tasked with ""retiring"" rogue androids who have escaped from Mars. As he hunts them down, he grapples with the question of what it means to be human. This novel inspired the movie ""Blade Runner"" and is a thought-provoking exploration of artificial intelligence, empathy, and identity.',
+ 'A post-apocalyptic novel set in a future where Earth has been ravaged by nuclear war. The story follows bounty hunter Rick Deckard, who is tasked with "retiring" rogue androids who have escaped from Mars. As he hunts them down, he grapples with the question of what it means to be human. This novel inspired the movie "Blade Runner" and is a thought-provoking exploration of artificial intelligence, empathy, and identity.',
  'Science Fiction', 'English', 9.99, 26, 10, '2024-08-19 23:03:01', '2024-08-19 23:03:01'),
 
 (2, '1984', 'George Orwell',
@@ -68,8 +68,8 @@ VALUES
 -- users
 INSERT INTO public.users (id, name, email, password, created_at, updated_at, role)
 VALUES
-    (1, 'User', 'user@google.com', '$2y$12$sBpHHTT8rmpARhxGrSbxOO3oiAk3M1sKokHV/r81JJvkuziETYx3q', NOW(), NOW(), 'user'),
-    (2, 'Admin', 'admin@google.com', '$2y$12$6ZaOp.TK0BNotIGtpIDM5.AFrcctLXWGxF9MzT9M7djyN8szGV3Gm', NOW(), NOW(), 'admin');
+    (1, 'User', 'user@gmail.com', '$2y$12$sBpHHTT8rmpARhxGrSbxOO3oiAk3M1sKokHV/r81JJvkuziETYx3q', NOW(), NOW(), 'user'),
+    (2, 'Admin', 'admin@gmail.com', '$2y$12$6ZaOp.TK0BNotIGtpIDM5.AFrcctLXWGxF9MzT9M7djyN8szGV3Gm', NOW(), NOW(), 'admin');
 
 SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 SELECT pg_catalog.setval('public.products_id_seq', 9, true);

@@ -55,7 +55,7 @@
                     <div class="row mt-4">
 
                         <!-- First Name -->
-                        <div class="col-md-4 position-relative ">
+                        <div class="col-md-4 position-relative mt-4 mt-md-0">
                             <label for="name" class="form-label">First Name</label>
                             <input
                                 id="name"
@@ -70,7 +70,7 @@
                         </div>
 
                         <!-- Last Name -->
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-4 position-relative mt-4 mt-md-0">
                             <label for="last_name" class="form-label">Last Name</label>
                             <input
                                 id="last_name"
@@ -84,7 +84,7 @@
                         </div>
 
                         <!-- Date of Birth -->
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-4 position-relative mt-4 mt-md-0">
                             <label for="birth_date" class="form-label">Date of Birth</label>
                             <input
                                 id="birth_date"
@@ -99,10 +99,10 @@
                     </div>
 
                     <!-- Bottom Row -->
-                    <div class="row mt-4">
+                    <div class="row mt-md-4">
 
                         <!-- Email -->
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-4 position-relative mt-4 mt-md-0">
                             <label for="email" class="form-label">Email</label>
                             <input
                                 id="email"
@@ -117,7 +117,7 @@
                         </div>
 
                         <!-- Phone Number -->
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-4 position-relative mt-4 mt-md-0">
                             <label for="phone_number" class="form-label">Phone Number</label>
                             <input
                                 id="phone_number"
@@ -134,7 +134,7 @@
 
 
                         <!-- Save Button -->
-                        <div class="col-md-4 col-12 d-flex align-items-end mt-3 mt-md-0">
+                        <div class="col-md-4 col-12 d-flex align-items-end mt-5 mt-md-0">
                             <button type="submit" class="btn btn-primary w-100">
                                 Save Changes
                             </button>
@@ -179,7 +179,7 @@
                         </div>
 
                         <!-- Confirm Password -->
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-4 position-relative mt-4 mt-md-0">
                             <label for="password_confirmation" class="form-label">Confirm Password</label>
                             <input
                                 id="password_confirmation"
@@ -192,7 +192,7 @@
                         </div>
                         
                         <!-- Update Button -->
-                        <div class="col-md-4 col-12 d-flex align-items-end mt-3 mt-md-0">
+                        <div class="col-md-4 col-12 d-flex align-items-end mt-5 mt-md-0">
                             <button type="submit" class="btn btn-primary w-100">
                                 Update Password
                             </button>

@@ -30,7 +30,7 @@ class LoginController extends Controller
 
         if(!Auth::attempt($validated)){
             throw ValidationException::withMessages([
-                'credentials' => 'Incorrect email or password.'
+                'credentials' => 'The email or password is incorrect.'
             ]);
             
         }
