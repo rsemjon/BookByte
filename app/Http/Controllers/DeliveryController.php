@@ -113,15 +113,19 @@ class DeliveryController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
     
-            if (!$user->last_name && $order->last_name) {
-                $user->last_name = $order->last_name;
-            }
-            if (!$user->phone_number && $order->phone_number) {
-                $user->phone_number = $order->phone_number;
-            }
-    
-            if ($user->isDirty(['last_name', 'phone_number'])) {
-                $user->save();
+            // only update user data if ordering for self (first names match)
+            // prevents saving someone else data to the users profile
+            if ($user->first_name === $order->first_name) {
+                if (!$user->last_name && $order->last_name) {
+                    $user->last_name = $order->last_name;
+                }
+                if (!$user->phone_number && $order->phone_number) {
+                    $user->phone_number = $order->phone_number;
+                }
+            
+                if ($user->isDirty(['last_name', 'phone_number'])) {
+                    $user->save();
+                }
             }
         } else {
             // guest
