@@ -10,5 +10,5 @@ To create database:
 
 It creates database with books and two users:
 
-User: user@example.com user111
-Admin: admin@example.com admin111
+User: user@google.com user111
+Admin: admin@google.com admin111

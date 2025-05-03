@@ -63,27 +63,85 @@
                     <div id="address_info" class="collapse p-3">
     
                         <!-- Personal Info -->
-                        <label class="form-label">First name</label>
-                        <input name="first_name_home" type="text" class="form-control mb-2" placeholder="Enter your first name" value="{{ old('first_name_home', $order->first_name ?? '') }}">
-    
-                        <label class="form-label">Last name</label>
-                        <input name="last_name_home" type="text" class="form-control mb-2" placeholder="Enter your last name" value="{{ old('last_name_home', $order->last_name ?? '') }}">
-    
-                        <label class="form-label">Phone number</label>
-                        <input name="phone_number_home" type="text" class="form-control mb-2" placeholder="Enter your phone number" value="{{ old('phone_number_home', $order->phone_number ?? '') }}">
-    
-                        <label class="form-label">Email address</label>
-                        <input name="email_address_home" type="email" class="form-control mb-2" placeholder="Enter your email address" value="{{ old('email_address_home', $order->email_address ?? '') }}">
+
+                        <!-- First Name -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">First Name</label>
+                            <input name="first_name_home"
+                                   type="text"
+                                   class="form-control @error('first_name_home') is-invalid @enderror"
+                                   value="{{ old('first_name_home', $order->first_name ?? '') }}"
+                                   placeholder="e.g., John">
+                            @error('first_name_home') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Last Name</label>
+                            <input name="last_name_home"
+                                   type="text"
+                                   class="form-control @error('last_name_home') is-invalid @enderror"
+                                   value="{{ old('last_name_home', $order->last_name ?? '') }}"
+                                   placeholder="e.g., Doe">
+                            @error('last_name_home') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Phone Number</label>
+                            <input name="phone_number_home"
+                                   type="text"
+                                   class="form-control @error('phone_number_home') is-invalid @enderror"
+                                   value="{{ old('phone_number_home', $order->phone_number ?? '') }}"
+                                   placeholder="e.g., +421 912 345 678">
+                            @error('phone_number_home') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>  
+
+                        <!-- Email -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Email</label>
+                            <input name="email_address_home"
+                                   type="email"
+                                   class="form-control @error('email_address_home') is-invalid @enderror"
+                                   value="{{ old('email_address_home', $order->email_address ?? '') }}"
+                                   placeholder="e.g., john@example.com">
+                            @error('email_address_home') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
     
                         <!-- Address Info -->
-                        <label class="form-label">Delivery Address</label>
-                        <input name="address" type="text" class="form-control mb-2" placeholder="Enter your adress" value="{{ old('address', $order->address ?? '') }}">
-    
-                        <label class="form-label">City</label>
-                        <input name="city" type="text" class="form-control mb-2" placeholder="Enter your city" value="{{ old('city', $order->city ?? '') }}">
-    
-                        <label class="form-label">Postal Code</label>
-                        <input name="postal_code" type="text" class="form-control" placeholder="Enter your postal code" value="{{ old('postal_code', $order->postal_code ?? '') }}">
+
+                        <!-- Delivery Address -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Delivery Address</label>
+                            <input name="address"
+                                   type="text"
+                                   class="form-control @error('address') is-invalid @enderror"
+                                   value="{{ old('address', $order->address ?? '') }}"
+                                   placeholder="e.g., Main Street 123">
+                            @error('address') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- City -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">City</label>
+                            <input name="city"
+                                   type="text"
+                                   class="form-control @error('city') is-invalid @enderror"
+                                   value="{{ old('city', $order->city ?? '') }}"
+                                   placeholder="e.g., Bratislava">
+                            @error('city') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
+                        
+                        <!-- Postal Code -->
+                        <div class="position-relative">
+                            <label class="form-label">Postal Code</label>
+                            <input name="postal_code"
+                                   type="text"
+                                   class="form-control @error('postal_code') is-invalid @enderror"
+                                   value="{{ old('postal_code', $order->postal_code ?? '') }}"
+                                   placeholder="e.g., 812 34">
+                            @error('postal_code') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
     
                     </div>
 
@@ -105,17 +163,50 @@
                     <div id="drop_box_locations" class="collapse p-3">
 
                         <!-- Personal Info -->
-                        <label class="form-label">First name</label>
-                        <input name="first_name_dropbox" type="text" class="form-control mb-2" placeholder="Enter your first name" value="{{ old('first_name_dropbox', $order->first_name ?? '') }}">
 
-                        <label class="form-label">Last name</label>
-                        <input name="last_name_dropbox" type="text" class="form-control mb-2" placeholder="Enter your last name" value="{{ old('last_name_dropbox', $order->last_name ?? '') }}">
+                        <!-- First Name -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">First Name</label>
+                            <input name="first_name_dropbox"
+                                   type="text"
+                                   class="form-control @error('first_name_dropbox') is-invalid @enderror"
+                                   value="{{ old('first_name_dropbox', $order->first_name ?? '') }}"
+                                   placeholder="e.g., John">
+                            @error('first_name_dropbox') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
+                        
+                        <!-- Last Name -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Last Name</label>
+                            <input name="last_name_dropbox"
+                                   type="text"
+                                   class="form-control @error('last_name_dropbox') is-invalid @enderror"
+                                   value="{{ old('last_name_dropbox', $order->last_name ?? '') }}"
+                                   placeholder="e.g., Doe">
+                            @error('last_name_dropbox') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
 
-                        <label class="form-label">Phone number</label>
-                        <input name="phone_number_dropbox" type="text" class="form-control mb-2" placeholder="Enter your phone number" value="{{ old('phone_number_dropbox', $order->phone_number ?? '') }}">
+                        <!-- Phone Number -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Phone Number</label>
+                            <input name="phone_number_dropbox"
+                                   type="text"
+                                   class="form-control @error('phone_number_dropbox') is-invalid @enderror"
+                                   value="{{ old('phone_number_dropbox', $order->phone_number ?? '') }}"
+                                   placeholder="e.g., +421 912 345 678">
+                            @error('phone_number_dropbox') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
 
-                        <label class="form-label">Email address</label>
-                        <input name="email_address_dropbox" type="email" class="form-control mb-2" placeholder="Enter your email address" value="{{ old('email_address_dropbox', $order->email_address ?? '') }}">
+                        <!-- Email -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Email</label>
+                            <input name="email_address_dropbox"
+                                   type="email"
+                                   class="form-control @error('email_address_dropbox') is-invalid @enderror"
+                                   value="{{ old('email_address_dropbox', $order->email_address ?? '') }}"
+                                   placeholder="e.g., john@example.com">
+                            @error('email_address_dropbox') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
 
                         <!-- Drop Boxes -->
                         <label for="address" class="form-label">Available Drop Boxes</label>
@@ -146,17 +237,50 @@
                     <div id="store_pickup_locations" class="collapse p-3">
 
                         <!-- Personal Info -->
-                        <label class="form-label">First name</label>
-                        <input name="first_name_store" type="text" class="form-control mb-2" placeholder="Enter your first name" value="{{ old('first_name_store', $order->first_name ?? '') }}">
 
-                        <label class="form-label">Last name</label>
-                        <input name="last_name_store" type="text" class="form-control mb-2" placeholder="Enter your last name" value="{{ old('last_name_store', $order->last_name ?? '') }}">
+                        <!-- First Name -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">First Name</label>
+                            <input name="first_name_store"
+                                   type="text"
+                                   class="form-control @error('first_name_store') is-invalid @enderror"
+                                   value="{{ old('first_name_store', $order->first_name ?? '') }}"
+                                   placeholder="e.g., John">
+                            @error('first_name_store') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
 
-                        <label class="form-label">Phone number</label>
-                        <input name="phone_number_store" type="text" class="form-control mb-2" placeholder="Enter your phone number" value="{{ old('phone_number_store', $order->phone_number ?? '') }}">
+                        <!-- Last Name -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Last Name</label>
+                            <input name="last_name_store"
+                                   type="text"
+                                   class="form-control @error('last_name_store') is-invalid @enderror"
+                                   value="{{ old('last_name_store', $order->last_name ?? '') }}"
+                                   placeholder="e.g., Doe">
+                            @error('last_name_store') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
+                        
+                        <!-- Phone Number -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Phone Number</label>
+                            <input name="phone_number_store"
+                                   type="text"
+                                   class="form-control @error('phone_number_store') is-invalid @enderror"
+                                   value="{{ old('phone_number_store', $order->phone_number ?? '') }}"
+                                   placeholder="e.g., +421 912 345 678">
+                            @error('phone_number_store') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
 
-                        <label class="form-label">Email address</label>
-                        <input name="email_address_store" type="email" class="form-control mb-2" placeholder="Enter your email address" value="{{ old('email_address_store', $order->email_address ?? '') }}">
+                        <!-- Email -->
+                        <div class="mb-2 position-relative">
+                            <label class="form-label">Email</label>
+                            <input name="email_address_store"
+                                   type="email"
+                                   class="form-control @error('email_address_store') is-invalid @enderror"
+                                   value="{{ old('email_address_store', $order->email_address ?? '') }}"
+                                   placeholder="e.g., john@example.com">
+                            @error('email_address_store') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
+                        </div>
 
                         <!-- Stores -->
                         <label for="address" class="form-label">Available Stores</label>

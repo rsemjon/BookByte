@@ -68,8 +68,8 @@ VALUES
 -- users
 INSERT INTO public.users (id, name, email, password, created_at, updated_at, role)
 VALUES
-    (1, 'User', 'user@example.com', '$2y$12$sBpHHTT8rmpARhxGrSbxOO3oiAk3M1sKokHV/r81JJvkuziETYx3q', NOW(), NOW(), 'user'),
-    (2, 'Admin', 'admin@example.com', '$2y$12$6ZaOp.TK0BNotIGtpIDM5.AFrcctLXWGxF9MzT9M7djyN8szGV3Gm', NOW(), NOW(), 'admin');
+    (1, 'User', 'user@google.com', '$2y$12$sBpHHTT8rmpARhxGrSbxOO3oiAk3M1sKokHV/r81JJvkuziETYx3q', NOW(), NOW(), 'user'),
+    (2, 'Admin', 'admin@google.com', '$2y$12$6ZaOp.TK0BNotIGtpIDM5.AFrcctLXWGxF9MzT9M7djyN8szGV3Gm', NOW(), NOW(), 'admin');
 
 SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 SELECT pg_catalog.setval('public.products_id_seq', 9, true);

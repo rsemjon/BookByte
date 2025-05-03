@@ -47,10 +47,12 @@ class CartController extends Controller
         $order = $this->getOrder() ?? Order::create([
             'user_id' => Auth::id(),
             'order_status' => 'IN_PROGRESS',
-            'first_name' => Auth::user()->name ?? '',
-            'last_name' => '',
-            'phone_number' => '',
+
+            'first_name'    => Auth::user()->name ?? '',
+            'last_name'     => Auth::user()->last_name ?? '',
+            'phone_number'  => Auth::user()->phone_number ?? '',
             'email_address' => Auth::user()->email ?? '',
+
             'address' => '',
             'city' => '',
             'postal_code' => '',

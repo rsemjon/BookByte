@@ -37,60 +37,94 @@ class DeliveryController extends Controller
 
     public function store(Request $rq)
     {
-        $rq->validate(['deliveryMethod' => 'required|in:HOME,DROP_BOX,STORE']);
+        // validation=
+        $rules = [
+            'deliveryMethod' => 'required|in:HOME,DROP_BOX,STORE',
+        
+            // HOME
+            'first_name_home' => 'nullable|required_if:deliveryMethod,HOME|string|regex:/^[\p{L}\s\-]+$/u|max:255',
+            'last_name_home' => 'nullable|required_if:deliveryMethod,HOME|string|regex:/^[\p{L}\s\-]+$/u|max:255',
+            'email_address_home'=> 'nullable|required_if:deliveryMethod,HOME|email:rfc,dns|max:255',
+            'phone_number_home' => 'nullable|required_if:deliveryMethod,HOME|regex:/^\+[1-9][0-9]{7,14}$/',
+            'address' => 'nullable|required_if:deliveryMethod,HOME|string|max:255',
+            'city' => 'nullable|required_if:deliveryMethod,HOME|string|max:255',
+            'postal_code' => 'nullable|required_if:deliveryMethod,HOME|regex:/^[A-Za-z0-9\s\-]{3,20}$/',
+        
+            // DROP_BOX
+            'first_name_dropbox' => 'nullable|required_if:deliveryMethod,DROP_BOX|string|regex:/^[\p{L}\s\-]+$/u|max:255',
+            'last_name_dropbox' => 'nullable|required_if:deliveryMethod,DROP_BOX|string|regex:/^[\p{L}\s\-]+$/u|max:255',
+            'email_address_dropbox' => 'nullable|required_if:deliveryMethod,DROP_BOX|email:rfc,dns|max:255',
+            'phone_number_dropbox' => 'nullable|required_if:deliveryMethod,DROP_BOX|regex:/^\+[1-9][0-9]{7,14}$/',
+            'dropBox' => 'nullable|required_if:deliveryMethod,DROP_BOX|string|max:255',
+        
+            // STORE
+            'first_name_store' => 'nullable|required_if:deliveryMethod,STORE|string|regex:/^[\p{L}\s\-]+$/u|max:255',
+            'last_name_store' => 'nullable|required_if:deliveryMethod,STORE|string|regex:/^[\p{L}\s\-]+$/u|max:255',
+            'email_address_store' => 'nullable|required_if:deliveryMethod,STORE|email:rfc,dns|max:255',
+            'phone_number_store' => 'nullable|required_if:deliveryMethod,STORE|regex:/^\+[1-9][0-9]{7,14}$/',
+            'storePickup' => 'nullable|required_if:deliveryMethod,STORE|string|max:255',
+        ];
+        $validated = $rq->validate($rules);
 
+
+        $validated = $rq->validate($rules);
+
+        // order
         $order = Order::firstOrCreate(
             ['user_id' => Auth::id(), 'order_status' => 'IN_PROGRESS'],
             []
         );
 
-        $deliveryMethod = $rq->deliveryMethod;
-        $order->delivery_method = $deliveryMethod;
+        $method = $validated['deliveryMethod']; // HOME | DROP_BOX | STORE
+        $order->delivery_method = $method;
 
-        $prefix = match ($deliveryMethod) {
-            'HOME' => 'home',
+        $prefix = match ($method) {
+            'HOME'     => 'home',
             'DROP_BOX' => 'dropbox',
-            'STORE' => 'store',
+            'STORE'    => 'store',
         };
-        
-        $rq->validate([
-            "first_name_$prefix" => 'required|string|max:255',
-            "last_name_$prefix" => 'required|string|max:255',
-            "email_address_$prefix" => 'required|email|max:255',
-            "phone_number_$prefix" => 'required|string|max:30',
-        ]);
-        
-        $order->first_name = $rq->input("first_name_$prefix");
-        $order->last_name = $rq->input("last_name_$prefix");
-        $order->email_address = $rq->input("email_address_$prefix");
-        $order->phone_number = $rq->input("phone_number_$prefix");
 
-        if ($deliveryMethod === 'HOME') {
-            $rq->validate([
-                'address' => 'required|string|max:255',
-                'city' => 'required|string|max:255',
-                'postal_code' => 'required|string|max:20',
-            ]);
-            $order->address = $rq->address;
-            $order->city = $rq->city;
-            $order->postal_code = $rq->postal_code;
+        // common fields
+        $order->first_name = $validated["first_name_$prefix"];
+        $order->last_name = $validated["last_name_$prefix"];
+        $order->email_address = $validated["email_address_$prefix"];
+        $order->phone_number = $validated["phone_number_$prefix"];
 
-        } elseif ($deliveryMethod === 'DROP_BOX') {
-            $rq->validate(['dropBox' => 'required|string|max:255']);
-            [$city, $addr] = array_map('trim', explode('-', $rq->dropBox, 2));
+        // address depends on type
+        if ($method === 'HOME') {
+            $order->address = $validated['address'];
+            $order->city = $validated['city'];
+            $order->postal_code = $validated['postal_code'];
+
+        } elseif ($method === 'DROP_BOX') {
+            [$city, $addr] = array_map('trim', explode('-', $validated['dropBox'], 2));
             $order->city = $city;
             $order->address = $addr;
 
-        } elseif ($deliveryMethod === 'STORE') {
-            $rq->validate(['storePickup' => 'required|string|max:255']);
-            [$city, $addr] = array_map('trim', explode('-', $rq->storePickup, 2));
+        } else { // STORE
+            [$city, $addr] = array_map('trim', explode('-', $validated['storePickup'], 2));
             $order->city = $city;
             $order->address = $addr;
         }
 
         $order->save();
 
-        if (!Auth::check()) {
+        // add fields
+        if (Auth::check()) {
+            $user = Auth::user();
+    
+            if (!$user->last_name && $order->last_name) {
+                $user->last_name = $order->last_name;
+            }
+            if (!$user->phone_number && $order->phone_number) {
+                $user->phone_number = $order->phone_number;
+            }
+    
+            if ($user->isDirty(['last_name', 'phone_number'])) {
+                $user->save();
+            }
+        } else {
+            // guest
             session(['order_id' => $order->id]);
         }
 
