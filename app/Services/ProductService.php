@@ -160,6 +160,7 @@ class ProductService
             'language' => 'bail|required|string|max:255',
             'price' => 'bail|required|numeric|min:0|max:99999999.99',
             'in_stock' => 'bail|required|integer|min:0',
+            'cover_type' => 'bail|required',
         ]);
 
         $current  = DB::table('product_image')->where('product_id', $id)->count();
@@ -222,6 +223,7 @@ class ProductService
             'language' => 'bail|required|string|max:255',
             'price' => 'bail|required|numeric|min:0|max:99999999.99',
             'in_stock' => 'bail|required|integer|min:0',
+            'cover_type' => 'bail|required',
         ]);
 
         $validator->after(function($v) use($r){

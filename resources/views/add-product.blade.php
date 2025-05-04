@@ -177,6 +177,23 @@
                     @error('in_stock') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                 </div>
 
+                <div class="mb-3 position-relative">
+                    <label for="productCover" class="form-label">Cover</label>
+                    <select
+                        id="productCover"
+                        name="cover_type"
+                        required
+                        class="form-select border border-2 border-dark @error('cover_type') is-invalid @enderror">
+                        <option value="" disabled {{ old('cover_type') ? '' : 'selected' }}>Select a language</option>
+                        <option value="Papercover" {{ old('cover_type') == 'Papercover' ? 'selected' : '' }}>Papercover</option>
+                        <option value="Leather" {{ old('cover_type') == 'Leather' ? 'selected' : '' }}>Leather</option>
+                        <option value="Hardcover" {{ old('cover_type') == 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
+                    </select>
+                    @error('cover_type') 
+                        <div class="invalid-tooltip d-block">{{ $message }}</div> 
+                    @enderror
+                </div>
+
                 <!-- Save Button -->
                 <button type="submit" class="btn btn-success mt-4 w-100">
                     Save <i class="fas fa-save ms-2"></i>

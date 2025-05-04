@@ -21,7 +21,8 @@ class Product extends Model
         'language', 
         'price',
         'in_stock',
-        'total_purchased'
+        'total_purchased',
+        'cover_type'
     ];
 
     // If you want to specify hidden columns, use the 'hidden' property
