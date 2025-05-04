@@ -15,6 +15,10 @@
 
 <body class="d-flex flex-column min-vh-100">
 
+    @if (session('success'))
+        @include('components.alert', ['message' => session('success')])
+    @endif
+
     <!-- Header -->
     @include('components.header')
 

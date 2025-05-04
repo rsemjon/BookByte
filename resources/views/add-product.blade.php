@@ -160,6 +160,22 @@
                             class="form-control border border-2 border-dark @error('language') is-invalid @enderror">
                     @error('language') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
                 </div>
+
+                <!-- Cover Type -->
+                <div class="mb-3 position-relative">
+                    <label for="productCover" class="form-label">Cover</label>
+                    <select
+                        id="productCover"
+                        name="cover_type"
+                        required
+                        class="form-select border border-2 border-dark @error('cover_type') is-invalid @enderror">
+                        <option value="" disabled {{ old('cover_type') ? '' : 'selected' }}>Select... </option>
+                        <option value="Papercover" {{ old('cover_type') == 'Papercover' ? 'selected' : '' }}>Papercover</option>
+                        <option value="Leather" {{ old('cover_type') == 'Leather' ? 'selected' : '' }}>Leather</option>
+                        <option value="Hardcover" {{ old('cover_type') == 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
+                    </select>
+                    @error('cover_type')<div class="invalid-tooltip d-block">{{ $message }}</div>@enderror
+                </div>
                 
                 <!-- In Stock -->
                 <div class="mb-3 position-relative">
@@ -175,23 +191,6 @@
                             value="{{ old('in_stock') }}"
                             class="form-control border-2 border-dark @error('in_stock') is-invalid @enderror">
                     @error('in_stock') <div class="invalid-tooltip d-block">{{ $message }}</div> @enderror
-                </div>
-
-                <div class="mb-3 position-relative">
-                    <label for="productCover" class="form-label">Cover</label>
-                    <select
-                        id="productCover"
-                        name="cover_type"
-                        required
-                        class="form-select border border-2 border-dark @error('cover_type') is-invalid @enderror">
-                        <option value="" disabled {{ old('cover_type') ? '' : 'selected' }}>Select a language</option>
-                        <option value="Papercover" {{ old('cover_type') == 'Papercover' ? 'selected' : '' }}>Papercover</option>
-                        <option value="Leather" {{ old('cover_type') == 'Leather' ? 'selected' : '' }}>Leather</option>
-                        <option value="Hardcover" {{ old('cover_type') == 'Hardcover' ? 'selected' : '' }}>Hardcover</option>
-                    </select>
-                    @error('cover_type') 
-                        <div class="invalid-tooltip d-block">{{ $message }}</div> 
-                    @enderror
                 </div>
 
                 <!-- Save Button -->

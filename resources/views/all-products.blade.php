@@ -53,6 +53,7 @@
             <div class="d-flex align-items-center col-12 col-md-auto mt-2 mt-md-0">
                 <h5 class="fw-bold me-2 mb-0">Order by</h5>
                 <select class="form-select w-auto" id="sortSelect", name="sortOption" onchange="updateSort()">
+                <option value="" disabled {{ request('sortOption') ? '' : 'selected' }}>Select...</option>
                 <option value="bestsellers" {{ request('sortOption') == 'bestsellers' ? 'selected' : '' }}>Bestsellers</option>
                 <option value="price-asc" {{ request('sortOption') == 'price-asc' ? 'selected' : '' }}>Price: Low to High</option>
                 <option value="price-desc" {{ request('sortOption') == 'price-desc' ? 'selected' : '' }}>Price: High to Low</option>
@@ -132,6 +133,24 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="language[]" value="{{ $lang }}" id="lang_{{ $loop->index }}" @checked(in_array($lang, $selectedLanguages))>
                                 <label class="form-check-label" for="lang_{{ $loop->index }}">{{ $lang }}</label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Cover Type -->
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center">
+                            <h5 class="fw-bold mb-0">Cover</h5>
+                            <button type="button" class="btn btn-link border-0 p-0 ms-2 text-dark toggle-filter" data-target="coverFilters">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div id="coverFilters" class="mt-2" style="display: none;">
+                            @foreach($availableCoverTypes as $cover)
+                            <div class="form-check">
+                                <input class="form-check-input" name="cover_type[]" type="checkbox" id="cover_{{ $loop->index }}" value="{{ $cover }}" @checked(in_array($cover, $selectedCoverTypes))>
+                                <label class="form-check-label" for="cover_{{ $loop->index }}">{{ $cover }}</label>
                             </div>
                             @endforeach
                         </div>

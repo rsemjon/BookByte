@@ -106,12 +106,13 @@
                     <div class="d-flex flex-wrap gap-2 mt-2">
 
                         <!-- Genre -->
-                        <span class="badge bg-info me-2 fs-6 p-2" id="bookGenre">{{ $product->genre }}</span>
+                        <span class="badge bg-info fs-6 p-2" id="bookGenre">{{ $product->genre }}</span>
 
                         <!-- Language -->
-                        <span class="badge bg-info me-2 fs-6 p-2" id="bookLanguage">{{ $product->language }}</span>
+                        <span class="badge bg-info fs-6 p-2" id="bookLanguage">{{ $product->language }}</span>
 
-                        <span class="badge bg-info fs-6 p-2" id="bookCover">Cover:  {{ $product->cover_type }}</span>
+                        <!-- Cover Type -->
+                        <span class="badge bg-info fs-6 p-2" id="bookCover">{{ $product->cover_type }}</span>
 
                     </div>
                     

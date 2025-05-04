@@ -14,7 +14,6 @@ class ProductService
 {
     
     public function getAllProductsData(Request $request): array
-
     {
         $sortOptions = [
             'price-asc' => ['price', 'asc'],
@@ -29,10 +28,12 @@ class ProductService
         $selectedLanguages = $request->language ?? [];
         $selectedAuthors =array_map('trim', $request->author ?? []);
         $selectedGenres = array_map('trim', $request->genre ?? []);
+        $selectedCoverTypes = array_map('trim', $request->cover_type ?? []);
 
         $availableGenres = Product::select('genre')->distinct()->pluck('genre')->sort()->values();
         $availableLanguages = Product::select('language')->distinct()->pluck('language')->sort()->values();
         $availableAuthors = Product::select('author')->distinct()->pluck('author')->sort()->values();
+        $availableCoverTypes = Product::select('cover_type')->distinct()->pluck('cover_type')->sort()->values();
 
         $minPrice = floor(Product::min('price'));
         $maxPrice = ceil(Product::max('price'));
@@ -66,6 +67,10 @@ class ProductService
             $all->whereIn('products.genre', $request->genre);
         }
 
+        if ($request->has('cover_type') && is_array($request->cover_type)) {
+            $all->whereIn('products.cover_type', $request->cover_type);
+        }
+
         if ($min !== null && $max !== null) {
             $all->whereBetween('products.price', [$min, $max]);
         }
@@ -85,11 +90,13 @@ class ProductService
             'availableGenres' => $availableGenres,
             'availableLanguages' => $availableLanguages,
             'availableAuthors' => $availableAuthors,
+            'availableCoverTypes' => $availableCoverTypes,
             'minPrice' => $minPrice,
             'maxPrice' => $maxPrice,
             'selectedGenres' => $selectedGenres,
             'selectedLanguages' => $selectedLanguages,
             'selectedAuthors' => $selectedAuthors,
+            'selectedCoverTypes' => $selectedCoverTypes,
         ];
     }
 
